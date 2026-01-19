@@ -483,81 +483,207 @@
     }
 
     // 6. Chart Logic - Inversion
-    function renderInversionChart() {
-        if(inversionData.length === 0) return;
-        const substance = document.getElementById("inv-substance").value;
-        const region    = document.getElementById("inv-country").value;
-        const sYear     = parseInt(document.getElementById("inv-start-year").value);
-        const eYear     = parseInt(document.getElementById("inv-end-year").value);
+function renderInversionChart() {
+    // 获取 DOM 元素和输入值
+    const chartDom = document.getElementById("inversion-chart");
+    const substance = document.getElementById("inv-substance").value;
+    const region = document.getElementById("inv-country").value;
+    const sYear = parseInt(document.getElementById("inv-start-year").value);
+    const eYear = parseInt(document.getElementById("inv-end-year").value);
 
-        if (sYear > eYear) return;
+    if (sYear > eYear) {
+        alert("Start year cannot be greater than end year");
+        return;
+    }
 
-        const filtered = inversionData.filter(d =>
-            d.substance === substance && d.region === region && d.year >= sYear && d.year <= eYear
-        );
+    // 1. 数据过滤
+    const filtered = inversionData.filter(d =>
+        d.substance === substance &&
+        d.region === region &&
+        d.year >= sYear &&
+        d.year <= eYear
+    );
 
-        const uniqueYears = [...new Set(filtered.map(d => d.year))].sort((a,b) => a-b);
-        const studies = [...new Set(filtered.map(d => d.study))];
-
-        const chartDom = document.getElementById("inversion-chart");
+    if (filtered.length === 0) {
+        // 清空图表并提示
         const oldChart = echarts.getInstanceByDom(chartDom);
-        if (oldChart) oldChart.dispose();
-        const chart = echarts.init(chartDom);
+        if (oldChart) oldChart.clear();
+        // 可以在这里加一个无数据的提示 UI，或者仅 alert
+        console.warn("No inversion data available for current selection.");
+        return;
+    }
 
-        let series = [];
-        let allValues = [];
+    // 提取年份和研究列表
+    const years = [...new Set(filtered.map(d => d.year))].sort((a, b) => a - b);
+    const studies = [...new Set(filtered.map(d => d.study))];
 
-        studies.forEach(study => {
-            const rows = filtered.filter(d => d.study === study);
-            const lineData = [];
-            const errorData = [];
+    // 初始化图表
+    const oldChart = echarts.getInstanceByDom(chartDom);
+    if (oldChart) oldChart.dispose();
+    const chart = echarts.init(chartDom);
 
-            uniqueYears.forEach(y => {
-                const r = rows.find(d => d.year === y);
-                if (r) {
-                    lineData.push([y, r.mean]);
-                    if (r.sd) {
-                        errorData.push([y, r.mean - r.sd, r.mean + r.sd]);
-                        allValues.push(r.mean - r.sd, r.mean + r.sd);
-                    } else {
-                        allValues.push(r.mean);
+    let series = [];
+    let allValues = []; // 用于计算 Y 轴范围
+
+    studies.forEach(study => {
+        const rows = filtered.filter(d => d.study === study);
+        const lineData = [];
+        const errorData = [];
+
+        years.forEach(y => {
+            const r = rows.find(d => d.year === y);
+            if (r) {
+                // 兼容 CSV 表头大小写 (mean/Mean, sd/SD)
+                const val = r.mean !== undefined ? r.mean : r.Mean;
+                const dev = r.sd !== undefined ? r.sd : (r.SD !== undefined ? r.SD : null);
+
+                if (val !== undefined && val !== null) {
+                    lineData.push([y, val]);
+                    allValues.push(val);
+
+                    // 如果有标准差，准备误差棒数据：[year, low, high]
+                    if (dev !== null && dev !== undefined && !isNaN(dev)) {
+                        const low = val - dev;
+                        const high = val + dev;
+                        errorData.push([y, low, high]);
+                        allValues.push(low, high);
                     }
                 }
-            });
-
-            series.push({ name: study, type: "line", data: lineData, symbol: "circle" });
-
-            if (errorData.length > 0) {
-                series.push({
-                    type: "custom",
-                    name: study + " error",
-                    renderItem: function (params, api) {
-                        const x = api.coord([api.value(0), api.value(2)]);
-                        const y = api.coord([api.value(0), api.value(1)]);
-                        return {
-                            type: "group",
-                            children: [
-                                { type: "line", shape: { x1: x[0], y1: x[1], x2: y[0], y2: y[1] }, style: api.style({stroke: api.visual('color')}) },
-                                { type: "line", shape: { x1: x[0]-4, y1: x[1], x2: x[0]+4, y2: x[1] }, style: api.style({stroke: api.visual('color')}) },
-                                { type: "line", shape: { x1: y[0]-4, y1: y[1], x2: y[0]+4, y2: y[1] }, style: api.style({stroke: api.visual('color')}) }
-                            ]
-                        };
-                    },
-                    data: errorData,
-                    z: 100
-                });
             }
         });
 
-        chart.setOption({
-            title: { text: `${substance} Inversion Emissions (${region})`, left: "center" },
-            tooltip: { trigger: "axis" },
-            legend: { bottom: 0 },
-            xAxis: { type: "category", data: uniqueYears },
-            yAxis: { type: "value", name: "Gg yr⁻¹", min: Math.min(...allValues)*0.9 },
-            series: series
+        // 2. 添加折线系列 (Mean)
+        series.push({
+            name: study,
+            type: "line",
+            data: lineData,
+            symbol: "circle",
+            symbolSize: 8,
+            smooth: true,
+            lineStyle: { width: 3 }
         });
+
+        // 3. 添加自定义系列 (Error Bar)
+        if (errorData.length > 0) {
+            series.push({
+                type: "custom",
+                name: study + " error",
+                itemStyle: {
+                    borderWidth: 1.5
+                },
+                // 必须根据数据重新渲染
+                renderItem: function (params, api) {
+                    // api.value(0) 是 x轴(年份), value(1) 是下限, value(2) 是上限
+                    const xValue = api.value(0);
+                    const lowPoint = api.coord([xValue, api.value(1)]);
+                    const highPoint = api.coord([xValue, api.value(2)]);
+                    
+                    // 也可以只用 highPoint[0] 作为 x 坐标
+                    const x = highPoint[0]; 
+                    const yTop = highPoint[1];
+                    const yBottom = lowPoint[1];
+                    const halfWidth = 5; // 误差棒横线的半宽度
+
+                    // 关键修复：获取样式 api.style()
+                    // 这会让误差棒颜色自动匹配折线颜色
+                    const style = api.style({
+                        stroke: api.visual('color'),
+                        fill: null,
+                        lineWidth: 1.5
+                    });
+
+                    return {
+                        type: 'group',
+                        children: [
+                            // 竖线
+                            {
+                                type: 'line',
+                                transition: ['shape'],
+                                shape: { x1: x, y1: yTop, x2: x, y2: yBottom },
+                                style: style
+                            },
+                            // 上横线
+                            {
+                                type: 'line',
+                                transition: ['shape'],
+                                shape: { x1: x - halfWidth, y1: yTop, x2: x + halfWidth, y2: yTop },
+                                style: style
+                            },
+                            // 下横线
+                            {
+                                type: 'line',
+                                transition: ['shape'],
+                                shape: { x1: x - halfWidth, y1: yBottom, x2: x + halfWidth, y2: yBottom },
+                                style: style
+                            }
+                        ]
+                    };
+                },
+                encode: {
+                    x: 0,
+                    y: [1, 2] // 告诉 tooltip 这里包含了 y 轴范围信息
+                },
+                data: errorData,
+                z: 100, // 确保显示在折线层级上方或合适位置
+                tooltip: { show: false } // 误差棒本身不显示 tooltip，避免干扰
+            });
+        }
+    });
+
+    // 计算 Y 轴自适应范围
+    let yMin = 0;
+    let yMax = 100;
+    if (allValues.length > 0) {
+        const minVal = Math.min(...allValues);
+        const maxVal = Math.max(...allValues);
+        // 让 Y 轴留出一点余量
+        yMin = minVal >= 0 ? Math.max(0, minVal * 0.8) : minVal * 1.2;
+        yMax = maxVal * 1.1;
     }
+
+    const option = {
+        title: {
+            text: `${substance} Inversion Emissions (${region})`,
+            left: "center",
+            textStyle: { color: "#333" }
+        },
+        tooltip: {
+            trigger: "axis",
+            formatter: function (params) {
+                // 自定义 tooltip 仅显示折线的数据，或者同时显示范围
+                let html = `${params[0].axisValue}<br/>`;
+                params.forEach(p => {
+                    if (p.seriesType === 'line') {
+                        html += `${p.marker} ${p.seriesName}: <b>${p.value[1].toFixed(2)}</b><br/>`;
+                        // 尝试找到对应的误差数据 (可选)
+                    }
+                });
+                return html;
+            }
+        },
+        legend: {
+            bottom: 0,
+            data: studies // 仅显示研究名称，不显示 "study error"
+        },
+        grid: {
+            left: '3%', right: '4%', bottom: '10%', containLabel: true
+        },
+        xAxis: {
+            type: "category",
+            data: years,
+            boundaryGap: false
+        },
+        yAxis: {
+            type: "value",
+            name: "Gg yr⁻¹",
+            min: yMin,
+            max: yMax
+        },
+        series: series
+    };
+
+    chart.setOption(option);
+}
 
     // 7. Chart Logic - Comparison
     function renderComparisonChart() {
