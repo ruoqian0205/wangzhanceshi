@@ -841,7 +841,7 @@ function renderComparisonChart() {
         return;
     }
 
-    // 2. 构造完整的横坐标年份数组（满足需求2：横坐标随起始/终止年份动态变化）
+    // 2. 构造完整的横坐标年份数组
     const yearRange = [];
     for (let y = sYear; y <= eYear; y++) {
         yearRange.push(y);
@@ -897,26 +897,30 @@ function renderComparisonChart() {
         const errorData = [];
         const method = rows[0]?.method || "Unknown";
 
-        // 遍历完整的 yearRange 以确保数据点对齐坐标轴
+        // 遍历完整的 yearRange
         yearRange.forEach((y, idx) => {
             const r = rows.find(d => d.year === y);
             if (!r) {
-                lineData.push(null); // 无数据年份填充 null，避免连线错误
+                lineData.push(null); // 该年无数据，Tooltip 将不会显示此研究
                 return;
             }
 
             const val = r.value ?? r.mean ?? r.Mean;
-            const sd = r.sd ?? r.SD;
+            const sd = r.sd ?? r.SD ?? 0;
 
             if (val !== undefined && val !== null) {
-                lineData.push(val);
+                // 将 SD 存储在数据项中以便 Tooltip 调用
+                lineData.push({
+                    value: val,
+                    sdValue: sd
+                });
                 allValuesForScale.push(val);
 
                 // 记录误差棒数据
-                if (sd !== undefined && sd !== null && !isNaN(sd)) {
+                if (sd > 0) {
                     const upper = val + sd;
                     const lower = val - sd;
-                    errorData.push([idx, lower, upper]); // 使用索引对齐横坐标
+                    errorData.push([idx, lower, upper]);
                     allValuesForScale.push(upper, lower);
                 }
             } else {
@@ -924,13 +928,13 @@ function renderComparisonChart() {
             }
         });
 
-        // 添加主折线（需求1：smooth: false 为直线）
+        // 添加主折线
         series.push({
             name: name,
             type: "line",
             data: lineData,
-            smooth: false,      // 直线相连
-            connectNulls: false, // 缺失数据处断开
+            smooth: false,
+            connectNulls: false, // 核心需求：缺失处不连线
             symbol: method.toLowerCase().includes("bottom-up") ? "circle" : "emptyTriangle",
             symbolSize: 8,
             z: 20
@@ -960,21 +964,20 @@ function renderComparisonChart() {
                 },
                 data: errorData,
                 z: 10,
-                tooltip: { show: false }
+                tooltip: { show: false } // 隐藏误差棒自身的 tooltip，统一由 axis tooltip 处理
             });
         }
 
         tableHTML += `<tr><td class="px-6 py-4">${name}</td><td class="px-6 py-4">${method}</td><td class="px-6 py-4">${sYear}-${eYear}</td></tr>`;
     });
 
-    // 动态 Y 轴步长计算
+    // 动态 Y 轴计算
     const rawMax = Math.max(...allValuesForScale);
     const splitNumber = 5;
     let interval = Math.ceil((rawMax || 100) / splitNumber / 5) * 5;
     if (interval === 0) interval = 10;
     const yMax = interval * splitNumber;
 
-    // 更新底部表格内容
     const tableBody = document.getElementById("comp-table-body");
     if (tableBody) tableBody.innerHTML = tableHTML;
 
@@ -985,17 +988,38 @@ function renderComparisonChart() {
             left: "center",
             top: 10
         },
-        tooltip: { trigger: "axis" },
+        tooltip: { 
+            trigger: "axis",
+            // 核心修改：自定义 Tooltip 内容
+            formatter: function(params) {
+                let res = `<b>Year: ${params[0].name}</b><br/>`;
+                let hasValidData = false;
+
+                params.forEach(p => {
+                    // 只处理 line 类型的系列，且排除值为 null 的点
+                    if (p.seriesType === 'line' && p.value !== null && p.value !== undefined) {
+                        // 因为 data 改为了对象，所以取值方式为 p.value.value 或 p.data.value
+                        const val = p.data.value !== undefined ? p.data.value : p.value;
+                        const sd = p.data.sdValue !== undefined ? p.data.sdValue : "N/A";
+                        
+                        res += `${p.marker} ${p.seriesName}: <b>${val}</b> (±${sd})<br/>`;
+                        hasValidData = true;
+                    }
+                });
+                
+                return hasValidData ? res : null;
+            }
+        },
         legend: { bottom: 5, data: datasets },
         grid: { left: '5%', right: '5%', bottom: '15%', containLabel: true },
         xAxis: { 
             type: "category", 
-            data: yearRange, // 关键：使用完整的连续年份数组
+            data: yearRange,
             boundaryGap: true,
-            axisTick: { alignWithLabel: true }, // 刻度线对齐文字中心
+            axisTick: { alignWithLabel: true },
             axisLabel: {
                 interval: 0,
-                rotate: yearRange.length > 10 ? 45 : 0 // 年份较多时自动旋转
+                rotate: yearRange.length > 10 ? 45 : 0
             }
         },
         yAxis: { 
@@ -1004,7 +1028,7 @@ function renderComparisonChart() {
             min: 0,
             max: yMax,
             interval: interval,
-            splitLine: { show: true, lineStyle: { type: 'dashed' } } // 使用虚线网格
+            splitLine: { show: true, lineStyle: { type: 'dashed' } }
         },
         series: series
     });
