@@ -484,7 +484,7 @@
 
     // 6. Chart Logic - Inversion
 function renderInversionChart() {
-    // 获取 DOM 元素和输入值
+
     const chartDom = document.getElementById("inversion-chart");
     const substance = document.getElementById("inv-substance").value;
     const region = document.getElementById("inv-country").value;
@@ -496,7 +496,6 @@ function renderInversionChart() {
         return;
     }
 
-    // 1. 数据过滤
     const filtered = inversionData.filter(d =>
         d.substance === substance &&
         d.region === region &&
@@ -504,88 +503,79 @@ function renderInversionChart() {
         d.year <= eYear
     );
 
-    if (filtered.length === 0) {
-        // 清空图表并提示
-        const oldChart = echarts.getInstanceByDom(chartDom);
-        if (oldChart) oldChart.clear();
-        // 可以在这里加一个无数据的提示 UI，或者仅 alert
-        console.warn("No inversion data available for current selection.");
-        return;
-    }
-
-    // 提取年份和研究列表
-    const years = [...new Set(filtered.map(d => d.year))].sort((a, b) => a - b);
-    const studies = [...new Set(filtered.map(d => d.study))];
-
-    // 初始化图表
     const oldChart = echarts.getInstanceByDom(chartDom);
     if (oldChart) oldChart.dispose();
     const chart = echarts.init(chartDom);
 
+    if (filtered.length === 0) {
+        chart.clear();
+        console.warn("No inversion data available.");
+        return;
+    }
+
+    const years = [...new Set(filtered.map(d => d.year))].sort((a, b) => a - b);
+    const studies = [...new Set(filtered.map(d => d.study))];
+
     let series = [];
-    let allValues = []; // 用于计算 Y 轴范围
+    let allValues = [];
 
     studies.forEach(study => {
+
         const rows = filtered.filter(d => d.study === study);
+
+        // ===== 关键修复：一维数组 =====
         const lineData = [];
         const errorData = [];
 
-        years.forEach(y => {
+        years.forEach((y, idx) => {
             const r = rows.find(d => d.year === y);
-            if (r) {
-                // 兼容 CSV 表头大小写 (mean/Mean, sd/SD)
-                const val = r.mean !== undefined ? r.mean : r.Mean;
-                const dev = r.sd !== undefined ? r.sd : (r.SD !== undefined ? r.SD : null);
+            if (!r) {
+                lineData.push(null);
+                return;
+            }
 
-                if (val !== undefined && val !== null) {
-                    lineData.push([y, val]);
-                    allValues.push(val);
+            const val = r.mean ?? r.Mean;
+            const sd  = r.sd ?? r.SD ?? null;
 
-                    // 如果有标准差，准备误差棒数据：[year, low, high]
-                    if (dev !== null && dev !== undefined && !isNaN(dev)) {
-                        const low = val - dev;
-                        const high = val + dev;
-                        errorData.push([y, low, high]);
-                        allValues.push(low, high);
-                    }
+            if (val !== undefined && val !== null) {
+                lineData.push(val);
+                allValues.push(val);
+
+                if (sd !== null && !isNaN(sd)) {
+                    const low = val - sd;
+                    const high = val + sd;
+                    errorData.push([idx, low, high]); // ⚠️ 用 index
+                    allValues.push(low, high);
                 }
+            } else {
+                lineData.push(null);
             }
         });
 
-        // 2. 添加折线系列 (Mean)
+        // 折线
         series.push({
             name: study,
             type: "line",
             data: lineData,
-            symbol: "circle",
-            symbolSize: 8,
             smooth: true,
-            lineStyle: { width: 3 }
+            symbol: "circle",
+            symbolSize: 7,
+            lineStyle: { width: 2 }
         });
 
-        // 3. 添加自定义系列 (Error Bar)
+        // 误差棒
         if (errorData.length > 0) {
             series.push({
-                type: "custom",
                 name: study + " error",
-                itemStyle: {
-                    borderWidth: 1.5
-                },
-                // 必须根据数据重新渲染
+                type: "custom",
+                tooltip: { show: false },
                 renderItem: function (params, api) {
-                    // api.value(0) 是 x轴(年份), value(1) 是下限, value(2) 是上限
-                    const xValue = api.value(0);
-                    const lowPoint = api.coord([xValue, api.value(1)]);
-                    const highPoint = api.coord([xValue, api.value(2)]);
-                    
-                    // 也可以只用 highPoint[0] 作为 x 坐标
-                    const x = highPoint[0]; 
-                    const yTop = highPoint[1];
-                    const yBottom = lowPoint[1];
-                    const halfWidth = 5; // 误差棒横线的半宽度
 
-                    // 关键修复：获取样式 api.style()
-                    // 这会让误差棒颜色自动匹配折线颜色
+                    const xIndex = api.value(0);
+                    const low = api.coord([xIndex, api.value(1)]);
+                    const high = api.coord([xIndex, api.value(2)]);
+                    const half = 5;
+
                     const style = api.style({
                         stroke: api.visual('color'),
                         fill: null,
@@ -595,95 +585,23 @@ function renderInversionChart() {
                     return {
                         type: 'group',
                         children: [
-                            // 竖线
-                            {
-                                type: 'line',
-                                transition: ['shape'],
-                                shape: { x1: x, y1: yTop, x2: x, y2: yBottom },
-                                style: style
-                            },
-                            // 上横线
-                            {
-                                type: 'line',
-                                transition: ['shape'],
-                                shape: { x1: x - halfWidth, y1: yTop, x2: x + halfWidth, y2: yTop },
-                                style: style
-                            },
-                            // 下横线
-                            {
-                                type: 'line',
-                                transition: ['shape'],
-                                shape: { x1: x - halfWidth, y1: yBottom, x2: x + halfWidth, y2: yBottom },
-                                style: style
-                            }
+                            { type: 'line', shape: { x1: high[0], y1: high[1], x2: low[0], y2: low[1] }, style },
+                            { type: 'line', shape: { x1: high[0]-half, y1: high[1], x2: high[0]+half, y2: high[1] }, style },
+                            { type: 'line', shape: { x1: low[0]-half, y1: low[1], x2: low[0]+half, y2: low[1] }, style }
                         ]
                     };
                 },
-                encode: {
-                    x: 0,
-                    y: [1, 2] // 告诉 tooltip 这里包含了 y 轴范围信息
-                },
                 data: errorData,
-                z: 100, // 确保显示在折线层级上方或合适位置
-                tooltip: { show: false } // 误差棒本身不显示 tooltip，避免干扰
+                z: 10
             });
         }
     });
 
-    // 计算 Y 轴自适应范围
-    let yMin = 0;
-    let yMax = 100;
-    if (allValues.length > 0) {
-        const minVal = Math.min(...allValues);
-        const maxVal = Math.max(...allValues);
-        // 让 Y 轴留出一点余量
-        yMin = minVal >= 0 ? Math.max(0, minVal * 0.8) : minVal * 1.2;
-        yMax = maxVal * 1.1;
-    }
+    // Y 轴范围
+    let yMin = 0, yMax = 100;
+    if (allValues.length) {
+        yMin = Math.max(0, Math.m
 
-    const option = {
-        title: {
-            text: `${substance} Inversion Emissions (${region})`,
-            left: "center",
-            textStyle: { color: "#333" }
-        },
-        tooltip: {
-            trigger: "axis",
-            formatter: function (params) {
-                // 自定义 tooltip 仅显示折线的数据，或者同时显示范围
-                let html = `${params[0].axisValue}<br/>`;
-                params.forEach(p => {
-                    if (p.seriesType === 'line') {
-                        html += `${p.marker} ${p.seriesName}: <b>${p.value[1].toFixed(2)}</b><br/>`;
-                        // 尝试找到对应的误差数据 (可选)
-                    }
-                });
-                return html;
-            }
-        },
-        legend: {
-            bottom: 0,
-            data: studies // 仅显示研究名称，不显示 "study error"
-        },
-        grid: {
-            left: '3%', right: '4%', bottom: '10%', containLabel: true
-        },
-        xAxis: {
-            type: "category",
-            data: years,
-            boundaryGap: false
-        },
-        yAxis: {
-            type: "value",
-            name: "Gg yr⁻¹",
-            min: yMin,
-            max: yMax
-        },
-        series: series
-    };
-
-    chart.setOption(option);
-}
 
     // 7. Chart Logic - Comparison
     function renderComparisonChart() {
