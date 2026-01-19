@@ -8,6 +8,8 @@
     <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
     <style>
         .page { display: none; }
         .page.active { display: block; }
@@ -406,18 +408,50 @@ let inventoryData = [];
 let inversionData = [];
 let comparisonData = [];
 
-async function loadCSV(path) {
-    const res = await fetch(path);
-    const text = await res.text();
-    return Papa.parse(text, { header: true, dynamicTyping: true }).data;
-}
+// 修改后的数据加载函数
+async function loadData() {
+    try {
+        console.log("Starting to load CSV data...");
+        
+        // 定义加载单个 CSV 的函数
+        const fetchCSV = async (url) => {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const csvText = await response.text();
+            return new Promise(resolve => {
+                Papa.parse(csvText, {
+                    header: true,
+                    dynamicTyping: true, // 自动将数字字符串转为数字
+                    skipEmptyLines: true,
+                    complete: (results) => resolve(results.data)
+                });
+            });
+        };
 
-async function loadAllData() {
-    inventoryData  = await loadCSV("inventory.csv");
-    inversionData  = await loadCSV("inversion.csv");
-    comparisonData = await loadCSV("comparison.csv");
-}
+        // 并行加载三个文件 (请确保 GitHub 仓库中文件名准确)
+        const [inv, invs, comp] = await Promise.all([
+            fetchCSV('inventory.csv'),
+            fetchCSV('inversion.csv'),
+            fetchCSV('comparison.csv')
+        ]);
 
+        inventoryData = inv;
+        inversionData = invs;
+        comparisonData = comp;
+
+        console.log("Data loaded successfully:", { inventoryData, inversionData, comparisonData });
+        
+        // 加载完成后初始化图表
+        updateInventoryChart(currentInvChartType);
+        renderInversionChart();
+        renderComparisonChart();
+
+    } catch (error) {
+        console.error("Failed to load data:", error);
+        // 在页面上给用户报错提示
+        document.body.insertAdjacentHTML('afterbegin', `<div class="bg-red-500 text-white p-4 text-center">Data loading failed. Please check file paths.</div>`);
+    }
+}
 
     /* ===== 全局变量与工具 ===== */
     const years = Array.from({length: 45}, (_, i) => 1980 + i); // 1980 - 2024
