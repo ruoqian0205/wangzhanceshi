@@ -202,7 +202,7 @@
             <div>
                 <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Substance</label>
                 <select id="inv-substance" class="w-full border p-2 rounded text-sm">
-                    <option>CFC-11</option><option>CFC-12</option>
+                    <option value="" disabled selected>-- Select Substance --</option><option>CFC-11</option><option>CFC-12</option><option>CFC-113</option>
                     <option>HCFC-22</option><option>HCFC-141b</option><option>HCFC-142b</option>
                     <option>HFC-134a</option><option>HFC-143a</option><option>HFC-32</option>
                     <option>HFC-125</option><option>HFC-152a</option>
@@ -212,7 +212,7 @@
             <div>
                 <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Region</label>
                 <select id="inv-country" class="w-full border p-2 rounded text-sm">
-                    <option>China</option><option>USA</option><option>Europe</option>
+                    <option value="" disabled selected>-- Select Region --</option><option>China</option><option>USA</option><option>Europe</option>
                     <option>India</option><option>Japan</option><option>Global</option>
                 </select>
             </div>
@@ -239,36 +239,28 @@
     </div>
 
     <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 mb-8">
-        <h3 class="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-green-600 pl-4">Methodology: Top-down Inversion</h3>
+        <h3 class="text-2xl font-bold text-gray-900 mb-4 border-l-4 border-green-600 pl-4">Methodology</h3>
         <p class="text-gray-600 leading-relaxed italic">
-            The top-down inversion method is an independent assessment method based on atmospheric observations. It involves directly measuring the concentrations of target gases in the atmosphere via ground-based stations and satellites.
+            The top-down approach utilizes atmospheric concentration observations, integrated with atmospheric transport models and inversion algorithms, to estimate total emissions and their spatial distributions. This methodology is generally classified into the interspecies ratio method (ISC) and the inversion method. For detailed methodologies, please refer to the publications listed below.
         </p>
     </div>
 
-<div class="bg-gray-50 p-6 rounded-xl border border-gray-200 mt-8">
-    <h3 class="text-lg font-bold text-gray-800 mb-4 flex items-center">
-        <svg class="w-5 h-5 mr-2 text-green-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
-        </svg>
-        Data References for Current Selection
-    </h3>
-    <div class="overflow-x-auto bg-white rounded-lg shadow-sm">
-        <table class="min-w-full divide-y divide-gray-200">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase">Study</th>
-                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase">Substance</th>
-                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase">Region</th>
-                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase">Year</th>
-                    <th class="px-4 py-3 text-left text-xs font-bold text-gray-600 uppercase">Full Citation</th>
+<div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+        <h3 class="text-xl font-bold text-gray-900 mb-6">Publications</h3>
+    <div class="overflow-x-auto">
+        <table class="w-full text-left text-sm border-collapse">
+            <thead>
+                <tr class="bg-gray-50 border-b">
+                        <th class="p-4 font-bold">Study</th>
+                        <th class="p-4 font-bold">Substance</th>
+                        <th class="p-4 font-bold">Region</th>
+                        <th class="p-4 font-bold">Year</th>
+                        <th class="p-4 font-bold">Reference</th>
                 </tr>
             </thead>
-            <tbody id="inversion-ref-table" class="divide-y divide-gray-100 text-sm text-gray-700">
+            <tbody id="inversion-ref-table" class="divide-y">
                 </tbody>
         </table>
-    </div>
-    <div id="no-ref-msg" class="hidden text-center py-6 text-gray-400 italic">
-        No specific reference data found for this selection.
     </div>
 </div>
 
@@ -1000,45 +992,58 @@ function updateReferenceTable(data) {
     
     if (!tableBody) return;
 
-    // 清空现有内容
+    // 1. 清空现有内容
     tableBody.innerHTML = "";
 
-    if (data.length === 0) {
-        noDataMsg.classList.remove("hidden");
+    if (!data || data.length === 0) {
+      tableBody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400">No references available.</td></tr>`;
         return;
     }
-    noDataMsg.classList.add("hidden");
 
-    // 为了避免表格过长，我们可以按 研究+年份 进行去重显示，或者显示所有涉及的条目
-    // 这里采用：显示当前筛选范围内所有出现的独特研究及其引用
-    const uniqueRefs = [];
-    const seen = new Set();
+    // 2. 按照 研究(study) + 物质(substance) + 区域(region) 进行分组
+    const groups = {};
 
     data.forEach(item => {
-        // 创建一个唯一标识：研究+年份+物质+区域
-        const key = `${item.study}-${item.year}-${item.substance}-${item.region}`;
-        if (!seen.has(key)) {
-            uniqueRefs.push(item);
-            seen.add(key);
+        // 创建分组唯一键
+        const groupKey = `${item.study}|${item.substance}|${item.region}`;
+        
+        if (!groups[groupKey]) {
+            groups[groupKey] = {
+                study: item.study,
+                substance: item.substance,
+                region: item.region,
+                years: [],
+                citation: item.citation || item.Citation || "Reference not provided in CSV"
+            };
         }
+        groups[groupKey].years.push(parseInt(item.year));
     });
 
-    // 排序：按年份降序，然后按研究缩写升序
-    uniqueRefs.sort((a, b) => b.year - a.year || a.study.localeCompare(b.study));
-
-    uniqueRefs.forEach(ref => {
-        const tr = document.createElement("tr");
-        tr.className = "hover:bg-blue-50 transition-colors";
+    // 3. 将分组转换为数组并处理年份范围
+    const summaryData = Object.values(groups).map(group => {
+        const minYear = Math.min(...group.years);
+        const maxYear = Math.max(...group.years);
         
-        // 容错处理：如果 CSV 里没有 citation 列，显示为 "N/A"
-        const citation = ref.citation || ref.Citation || "Reference not provided in CSV";
+        return {
+            ...group,
+            yearRange: minYear === maxYear ? `${minYear}` : `${minYear}–${maxYear}`
+        };
+    });
 
+    // 4. 排序：按研究名称字母顺序排列
+    summaryData.sort((a, b) => a.study.localeCompare(b.study));
+
+    // 5. 渲染表格行
+    summaryData.forEach(row => {
+        const tr = document.createElement("tr");
+        tr.className = "hover:bg-blue-50 transition-colors border-b border-gray-100";
+        
         tr.innerHTML = `
-            <td class="px-4 py-3 font-semibold text-blue-900">${ref.study}</td>
-            <td class="px-4 py-3">${ref.substance}</td>
-            <td class="px-4 py-3">${ref.region}</td>
-            <td class="px-4 py-3 text-gray-500">${ref.year}</td>
-            <td class="px-4 py-3 italic text-gray-600">${citation}</td>
+            <td class="px-4 py-3 font-semibold text-blue-900">${row.study}</td>
+            <td class="px-4 py-3 text-gray-700">${row.substance}</td>
+            <td class="px-4 py-3 text-gray-700">${row.region}</td>
+            <td class="px-4 py-3 text-gray-600 font-medium">${row.yearRange}</td>
+            <td class="px-4 py-3 italic text-gray-500 text-xs leading-relaxed">${row.citation}</td>
         `;
         tableBody.appendChild(tr);
     });
