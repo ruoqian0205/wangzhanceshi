@@ -333,6 +333,7 @@
                         <th class="p-4 font-bold">Substance</th>
                         <th class="p-4 font-bold">Region</th>
                         <th class="p-4 font-bold">Year</th>
+                        <th class="p-4 font-bold">Method</th>
                         <th class="p-4 font-bold">Reference</th>
                 </tr>
             </thead>
@@ -1257,6 +1258,7 @@ function updateComparisonReferenceTable(data) {
         const name = item.dataset || item.study || item.Name || "Unknown";
         const substance = item.substance || item.Substance || item.gas || "N/A";
         const region = item.region || item.Region || "Global";
+        const method = item.method;
         const citation = item.citation || item.Citation || item.reference || "Reference not provided";
         const rawYear = item.year || item.Year;
 
@@ -1268,6 +1270,7 @@ function updateComparisonReferenceTable(data) {
                 name: name,
                 substance: substance,
                 region: region,
+                method: method,
                 years: [],
                 citation: citation
             };
@@ -1291,7 +1294,7 @@ function updateComparisonReferenceTable(data) {
 
     summaryData.sort((a, b) => a.name.localeCompare(b.name));
 
-    // 严格按照 HTML <thead> 顺序渲染：Study, Substance, Region, Year, Reference
+    // 严格按照 HTML <thead> 顺序渲染：Study, Substance, Region, Year, Method, Reference
     summaryData.forEach(row => {
         const tr = document.createElement("tr");
         tr.className = "hover:bg-gray-50 transition-colors border-b border-gray-100";
@@ -1301,6 +1304,7 @@ function updateComparisonReferenceTable(data) {
             <td class="px-6 py-4 text-gray-700">${row.substance}</td>
             <td class="px-6 py-4 text-gray-700">${row.region}</td>
             <td class="px-6 py-4 text-gray-500 font-medium">${row.yearRange}</td>
+            <td class="px-6 py-4 text-gray-700">${row.method}</td>
             <td class="px-6 py-4 italic text-gray-600 text-sm" style="max-width: 400px; overflow-wrap: break-word;">${row.citation}</td>
         `;
         tableBody.appendChild(tr);
