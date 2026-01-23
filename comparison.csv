@@ -1,211 +1,211 @@
-year,region,substance,dataset,method,value,err_neg,err_pos
-2005,China,HFC-134a,"Su et al., 2015",Bottom-up Inventory,5,1.8,2
-2006,China,HFC-134a,"Su et al., 2015",Bottom-up Inventory,5.6,1.9,2.1
-2007,China,HFC-134a,"Su et al., 2015",Bottom-up Inventory,7.2,2.5,2.6
-2008,China,HFC-134a,"Su et al., 2015",Bottom-up Inventory,9.3,3.5,3.1
-2009,China,HFC-134a,"Su et al., 2015",Bottom-up Inventory,12.3,4.3,4.7
-2010,China,HFC-134a,"Su et al., 2015",Bottom-up Inventory,16.7,5.9,5.3
-2005,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,4.91982,,
-2006,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,6.72374,,
-2007,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,8.88258,,
-2008,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,10.83068,,
-2009,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,13.67595,,
-2010,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,16.73334,,
-2011,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,21.11905,,
-2012,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,27.91687,,
-2013,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,33.29097,,
-2014,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,37.98363,,
-2005,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,1.65103,,
-2006,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,1.92718,,
-2007,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,2.49174,,
-2008,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,3.22439,,
-2009,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,4.16561,,
-2010,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,5.62334,,
-2011,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,7.56553,,
-2012,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,9.70063,,
-2013,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,11.82889,,
-2014,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,13.97229,,
-2015,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,16.70371,,
-2016,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,19.85205,,
-2017,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,23.14953,,
-2005,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,5.79545,0.35,0.35
-2006,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,6.13637,0.41,0.41
-2007,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,7.04545,0.49,0.49
-2008,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,8.18182,0.67,0.67
-2009,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,10.11361,0.65,0.65
-2010,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,12.44321,0.73,0.73
-2011,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,13.35229,1.84,1.84
-2012,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,14.31821,2.37,2.37
-2013,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,15.625,3,3
-2014,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,17.55679,2.61,2.61
-2015,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,18.80679,3.85,3.85
-2016,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,21.13639,3.97,3.97
-2017,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,23.35229,4.75,4.75
-2018,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,26.02271,4.28,4.28
-2019,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,28.35229,1.95,1.95
-2020,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,30.85229,2.12,2.12
-2005,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,1.90503,,
-2006,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,2.46389,,
-2007,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,3.19087,,
-2008,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,4.10268,,
-2009,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,5.54066,,
-2010,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,7.47879,,
-2011,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,9.56858,,
-2012,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,11.65695,,
-2013,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,13.76747,,
-2014,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,16.45371,,
-2015,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,19.54421,,
-2016,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,22.74495,,
-2017,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,26.28932,,
-2018,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,31.18713,,
-2019,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,36.41029,,
-2020,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,39.86142,,
-2005,China,HFC-134a,EDGAR v7,Bottom-up Inventory,4.9,,
-2006,China,HFC-134a,EDGAR v7,Bottom-up Inventory,6.7,,
-2007,China,HFC-134a,EDGAR v7,Bottom-up Inventory,8.9,,
-2008,China,HFC-134a,EDGAR v7,Bottom-up Inventory,11,,
-2009,China,HFC-134a,EDGAR v7,Bottom-up Inventory,14,,
-2010,China,HFC-134a,EDGAR v7,Bottom-up Inventory,17,,
-2011,China,HFC-134a,EDGAR v7,Bottom-up Inventory,21,,
-2012,China,HFC-134a,EDGAR v7,Bottom-up Inventory,28,,
-2013,China,HFC-134a,EDGAR v7,Bottom-up Inventory,33,,
-2014,China,HFC-134a,EDGAR v7,Bottom-up Inventory,35.97584,,
-2015,China,HFC-134a,EDGAR v7,Bottom-up Inventory,39.22005,,
-2016,China,HFC-134a,EDGAR v7,Bottom-up Inventory,42.75682,,
-2017,China,HFC-134a,EDGAR v7,Bottom-up Inventory,46.6125,,
-2018,China,HFC-134a,EDGAR v7,Bottom-up Inventory,50.46818,,
-2019,China,HFC-134a,EDGAR v7,Bottom-up Inventory,54.21758,,
-2020,China,HFC-134a,EDGAR v7,Bottom-up Inventory,58.03782,,
-2005,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,6.09579,0.49,0.49
-2006,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,6.55979,0.52,0.52
-2007,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,7.49058,0.59,0.59
-2008,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,8.91489,0.7,0.7
-2009,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,11.08376,0.88,0.88
-2010,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,14.966,1.22,1.22
-2011,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,19.01539,1.57,1.57
-2012,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,27.57237,2.4,2.4
-2013,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,29.95208,2.45,2.45
-2014,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,32.07703,2.5,2.5
-2015,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,34.88545,2.64,2.64
-2016,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,37.10768,2.73,2.73
-2017,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,41.54182,3.09,3.09
-2018,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,45.97597,3.42,3.42
-2019,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,48.52647,3.55,3.55
-2009,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,12.1,1.4,1.4
-2010,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,14.9,1.5,1.6
-2011,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,16.8,1.8,1.7
-2012,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,18.9,2,2
-2013,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,21.4,2.3,2.2
-2014,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,24.2,2.6,2.6
-2015,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,27.4,2.9,3
-2016,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,31.7,3.4,3.4
-2017,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,36.6,4,4
-2018,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,42.1,4.5,4.7
-2019,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,47.5,5,5.3
-2020,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,53,5.5,5.7
-2005,China,HFC-134a,"Yokouchi et al., 2006",Top-down ISC CO tracer,3.9,2.4,2.4
-2008,China,HFC-134a,"Kim et al., 2010",Top-down ISC HCFC-22 tracer,8.7,2.2,3.3
-2008,China,HFC-134a,"Li et al., 2011",Top-down ISC HCFC-22 tracer,8.3,2.1,2.7
-2009,China,HFC-134a,"Fang et al., 2012",Top-down ISC CO tracer,6.4,3,2.9
-2009,China,HFC-134a,"Fang et al., 2012",Top-down ISC HCFC-22 tracer,5.7,1,1
-2009,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,7.13,0.89418,0.89418
-2010,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,9.7,1.02579,1.02579
-2011,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,12,0.74189,0.74189
-2012,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,17.5,1.16939,1.16939
-2013,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,19.87,2.46871,2.46871
-2014,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,20.86,1.64,1.64
-2015,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,20.52,2.58479,2.58479
-2016,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,22.24,2.92129,2.92129
-2017,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,19.83,1.62161,1.62161
-2018,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,15.7,1.43711,1.43711
-2019,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,19.71,1.86261,1.86261
-2005,China,HFC-134a,"Stohl et al., 2009",Top-down Inverse Modeling,9.8,,
-2006,China,HFC-134a,"Stohl et al., 2009",Top-down Inverse Modeling,11.9,,
-2008,China,HFC-134a,"Stohl et al., 2010",Top-down Inverse Modeling,12.9,1.7,1.7
-2011,China,HFC-134a,"Lunt et al., 2015",Top-down Inverse Modeling,12.25,7.38,8.65
-2005,China,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,9,3,3
-2006,China,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,3,3
-2007,China,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,15,3,3
-2008,China,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,20,3,3
-2009,China,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,20,3,3
-2010,China,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,21,4,4
-2011,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,19.478,2.529,2.529
-2012,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,15.489,5.814,5.814
-2013,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,23.648,8.913,8.913
-2014,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,27.228,6.066,6.066
-2015,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,32.413,8.141,8.141
-2016,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,29.763,5.95,5.95
-2017,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,24.52,2.682,2.682
-2022,China,HFC-134a,"Hu et al., 2025",Top-down Inverse Modeling,42.63158,5.26316,5.26316
-2018,China,HFC-134a,"Ma at al., 2025",Top-down Inverse Modeling,30.5,4.8,4.8
-2019,China,HFC-134a,"Ma at al., 2025",Top-down Inverse Modeling,28.4,4.8,4.8
-2020,China,HFC-134a,"Ma at al., 2025",Top-down Inverse Modeling,33.1,7.5,7.5
-2008,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.12,1.27,1.27
-2009,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.45,1.45,1.45
-2010,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.76,1.65,1.65
-2011,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.2,1.47,1.47
-2012,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,5.98,1.4,1.4
-2013,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.75,1.71,1.71
-2014,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.76,1.7,1.7
-2015,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.59,1.72,1.72
-2016,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,8.16,2.38,2.38
-2017,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,11.46,2.73,2.73
-2018,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,12.35,2.45,2.45
-2019,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,10.83,2.18,2.18
-2020,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,9.89,1.89,1.89
-2010,Japan,HFC-134a,"Saito et al., 2015",Top-down Inverse Modeling,3.1,0.1,0.2
-2011,Japan,HFC-134a,"Saito et al., 2015",Top-down Inverse Modeling,4.1,0.1,0.2
-2012,Japan,HFC-134a,"Saito et al., 2015",Top-down Inverse Modeling,2.4,0.3,0.2
-2005,Japan,HFC-134a,"Stohl et al., 2009",Top-down Inverse Modeling,5.3,,
-2006,Japan,HFC-134a,"Stohl et al., 2009",Top-down Inverse Modeling,4,,
-2008,Japan,HFC-134a,"Stohl et al., 2010",Top-down Inverse Modeling,3.1,0.2,0.2
-2008,Japan,HFC-134a,"Li et al., 2011",Top-down Inverse Modeling,4.7,0.2,0.3
-1995,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,2,1,1
-1996,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,4,0,0
-1997,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,6,0,0
-1998,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,8,0,0
-1999,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,9,0,0
-2000,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,10,0,0
-2001,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,11,0,0
-2002,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,0,0
-2003,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,13,0,0
-2004,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,0,0
-2005,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,13,4,4
-2006,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,0,0
-2007,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,0,0
-2008,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,0,0
-2009,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,11,0,0
-2010,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,2,2
-2008,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,49.14,11.05,11.05
-2009,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,42.11,9.59,9.59
-2010,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,49.81,6.46,6.46
-2011,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,40.45,6.9,6.9
-2012,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,37.63,3.23,3.23
-2013,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,40.8,5.19,5.19
-2014,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,42.81,5.97,5.97
-2005,USA,HFC-134a,"Stohl et al., 2009",Top-down Inverse Modeling,34.8,,
-2006,USA,HFC-134a,"Stohl et al., 2009",Top-down Inverse Modeling,28.1,,
-2005,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,38.7,5.9,5.9
-2006,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,37.8,6.4,6.4
-2007,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,37.5,8.7,8.7
-2008,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,44.6,9.5,9.5
-2009,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,48.1,7.4,7.4
-2010,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,62,16.9,16.9
-2011,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,66.8,15.3,15.3
-2012,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,69.6,18.4,18.4
-1995,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,10,2,2
-1996,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,17,0,0
-1997,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,23,0,0
-1998,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,31,0,0
-1999,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,35,0,0
-2000,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,36,0,0
-2001,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,42,0,0
-2002,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,47,0,0
-2003,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,50,0,0
-2004,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,54,0,0
-2005,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,57,9,9
-2006,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,55,0,0
-2007,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,61,0,0
-2008,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,60,0,0
-2009,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,59,0,0
-2010,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,71,11,11
+year,region,substance,dataset,method,value,err_neg,err_pos,citation
+2005,China,HFC-134a,"Su et al., 2015",Bottom-up Inventory,5,1.8,2,"Su, S. et al. HFC-134a emissions from mobile air conditioning in China from 1995 to 2030. Atmos. Environ. 102, 122-129 (2015)."
+2006,China,HFC-134a,"Su et al., 2015",Bottom-up Inventory,5.6,1.9,2.1,"Su, S. et al. HFC-134a emissions from mobile air conditioning in China from 1995 to 2030. Atmos. Environ. 102, 122-129 (2015)."
+2007,China,HFC-134a,"Su et al., 2015",Bottom-up Inventory,7.2,2.5,2.6,"Su, S. et al. HFC-134a emissions from mobile air conditioning in China from 1995 to 2030. Atmos. Environ. 102, 122-129 (2015)."
+2008,China,HFC-134a,"Su et al., 2015",Bottom-up Inventory,9.3,3.5,3.1,"Su, S. et al. HFC-134a emissions from mobile air conditioning in China from 1995 to 2030. Atmos. Environ. 102, 122-129 (2015)."
+2009,China,HFC-134a,"Su et al., 2015",Bottom-up Inventory,12.3,4.3,4.7,"Su, S. et al. HFC-134a emissions from mobile air conditioning in China from 1995 to 2030. Atmos. Environ. 102, 122-129 (2015)."
+2010,China,HFC-134a,"Su et al., 2015",Bottom-up Inventory,16.7,5.9,5.3,"Su, S. et al. HFC-134a emissions from mobile air conditioning in China from 1995 to 2030. Atmos. Environ. 102, 122-129 (2015)."
+2005,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,4.91982,,,"Fang, X. et al. Changes in Emissions of Ozone-Depleting Substances from China Due to Implementation of the Montreal Protocol. Environ. Sci. Technol. 52, 11359-11366 (2018)."
+2006,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,6.72374,,,"Fang, X. et al. Changes in Emissions of Ozone-Depleting Substances from China Due to Implementation of the Montreal Protocol. Environ. Sci. Technol. 52, 11359-11366 (2018)."
+2007,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,8.88258,,,"Fang, X. et al. Changes in Emissions of Ozone-Depleting Substances from China Due to Implementation of the Montreal Protocol. Environ. Sci. Technol. 52, 11359-11366 (2018)."
+2008,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,10.83068,,,"Fang, X. et al. Changes in Emissions of Ozone-Depleting Substances from China Due to Implementation of the Montreal Protocol. Environ. Sci. Technol. 52, 11359-11366 (2018)."
+2009,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,13.67595,,,"Fang, X. et al. Changes in Emissions of Ozone-Depleting Substances from China Due to Implementation of the Montreal Protocol. Environ. Sci. Technol. 52, 11359-11366 (2018)."
+2010,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,16.73334,,,"Fang, X. et al. Changes in Emissions of Ozone-Depleting Substances from China Due to Implementation of the Montreal Protocol. Environ. Sci. Technol. 52, 11359-11366 (2018)."
+2011,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,21.11905,,,"Fang, X. et al. Changes in Emissions of Ozone-Depleting Substances from China Due to Implementation of the Montreal Protocol. Environ. Sci. Technol. 52, 11359-11366 (2018)."
+2012,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,27.91687,,,"Fang, X. et al. Changes in Emissions of Ozone-Depleting Substances from China Due to Implementation of the Montreal Protocol. Environ. Sci. Technol. 52, 11359-11366 (2018)."
+2013,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,33.29097,,,"Fang, X. et al. Changes in Emissions of Ozone-Depleting Substances from China Due to Implementation of the Montreal Protocol. Environ. Sci. Technol. 52, 11359-11366 (2018)."
+2014,China,HFC-134a,"Fang et al., 2018",Bottom-up Inventory,37.98363,,,"Fang, X. et al. Changes in Emissions of Ozone-Depleting Substances from China Due to Implementation of the Montreal Protocol. Environ. Sci. Technol. 52, 11359-11366 (2018)."
+2005,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,1.65103,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2006,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,1.92718,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2007,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,2.49174,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2008,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,3.22439,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2009,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,4.16561,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2010,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,5.62334,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2011,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,7.56553,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2012,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,9.70063,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2013,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,11.82889,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2014,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,13.97229,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2015,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,16.70371,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2016,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,19.85205,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2017,China,HFC-134a,"Li et al., 2019",Bottom-up Inventory,23.14953,,,"Li, Y.-X. et al. The estimated schedule and mitigation potential for hydrofluorocarbons phase-down in China. Adv. Clim. Change Res. 10, 174-180 (2019)."
+2005,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,5.79545,0.35,0.35,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2006,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,6.13637,0.41,0.41,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2007,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,7.04545,0.49,0.49,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2008,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,8.18182,0.67,0.67,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2009,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,10.11361,0.65,0.65,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2010,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,12.44321,0.73,0.73,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2011,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,13.35229,1.84,1.84,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2012,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,14.31821,2.37,2.37,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2013,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,15.625,3,3,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2014,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,17.55679,2.61,2.61,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2015,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,18.80679,3.85,3.85,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2016,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,21.13639,3.97,3.97,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2017,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,23.35229,4.75,4.75,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2018,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,26.02271,4.28,4.28,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2019,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,28.35229,1.95,1.95,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2020,China,HFC-134a,"Xiang et al., 2022",Bottom-up Inventory,30.85229,2.12,2.12,"Xiang, X.-Y. et al. Scenario analysis of hydrofluorocarbons emission reduction in China's mobile air-conditioning sector. Adv. Clim. Change Res. 13, 578-586 (2022)."
+2005,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,1.90503,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2006,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,2.46389,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2007,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,3.19087,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2008,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,4.10268,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2009,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,5.54066,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2010,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,7.47879,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2011,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,9.56858,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2012,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,11.65695,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2013,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,13.76747,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2014,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,16.45371,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2015,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,19.54421,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2016,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,22.74495,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2017,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,26.28932,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2018,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,31.18713,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2019,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,36.41029,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2020,China,HFC-134a,"Wu et al., 2023",Bottom-up Inventory,39.86142,,,"Wu, J. et al. Banks, emissions, and environmental impacts of China's ozone depletion substances and hydrofluorocarbon substitutes during 1980-2020. Sci. Total Environ. 882, 163586 (2023)."
+2005,China,HFC-134a,EDGAR v7,Bottom-up Inventory,4.9,,,
+2006,China,HFC-134a,EDGAR v7,Bottom-up Inventory,6.7,,,
+2007,China,HFC-134a,EDGAR v7,Bottom-up Inventory,8.9,,,
+2008,China,HFC-134a,EDGAR v7,Bottom-up Inventory,11,,,
+2009,China,HFC-134a,EDGAR v7,Bottom-up Inventory,14,,,
+2010,China,HFC-134a,EDGAR v7,Bottom-up Inventory,17,,,
+2011,China,HFC-134a,EDGAR v7,Bottom-up Inventory,21,,,
+2012,China,HFC-134a,EDGAR v7,Bottom-up Inventory,28,,,
+2013,China,HFC-134a,EDGAR v7,Bottom-up Inventory,33,,,
+2014,China,HFC-134a,EDGAR v7,Bottom-up Inventory,35.97584,,,
+2015,China,HFC-134a,EDGAR v7,Bottom-up Inventory,39.22005,,,
+2016,China,HFC-134a,EDGAR v7,Bottom-up Inventory,42.75682,,,
+2017,China,HFC-134a,EDGAR v7,Bottom-up Inventory,46.6125,,,
+2018,China,HFC-134a,EDGAR v7,Bottom-up Inventory,50.46818,,,
+2019,China,HFC-134a,EDGAR v7,Bottom-up Inventory,54.21758,,,
+2020,China,HFC-134a,EDGAR v7,Bottom-up Inventory,58.03782,,,
+2005,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,6.09579,0.49,0.49,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2006,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,6.55979,0.52,0.52,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2007,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,7.49058,0.59,0.59,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2008,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,8.91489,0.7,0.7,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2009,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,11.08376,0.88,0.88,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2010,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,14.966,1.22,1.22,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2011,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,19.01539,1.57,1.57,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2012,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,27.57237,2.4,2.4,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2013,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,29.95208,2.45,2.45,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2014,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,32.07703,2.5,2.5,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2015,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,34.88545,2.64,2.64,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2016,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,37.10768,2.73,2.73,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2017,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,41.54182,3.09,3.09,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2018,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,45.97597,3.42,3.42,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2019,China,HFC-134a,"Bai et al., 2023",Bottom-up Inventory,48.52647,3.55,3.55,"Bai, F. et al. Pathway and Cost-Benefit Analysis to Achieve China's Zero Hydrofluorocarbon Emissions. Environ. Sci. Technol. 57, 6474-6484 (2023)."
+2009,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,12.1,1.4,1.4,"Yi, L. et al. Atmospheric Observation and Emission of HFC-134a in China and Its Four Cities. Environ. Sci. Technol. 57, 4732-4740 (2023)."
+2010,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,14.9,1.5,1.6,"Yi, L. et al. Atmospheric Observation and Emission of HFC-134a in China and Its Four Cities. Environ. Sci. Technol. 57, 4732-4740 (2023)."
+2011,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,16.8,1.8,1.7,"Yi, L. et al. Atmospheric Observation and Emission of HFC-134a in China and Its Four Cities. Environ. Sci. Technol. 57, 4732-4740 (2023)."
+2012,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,18.9,2,2,"Yi, L. et al. Atmospheric Observation and Emission of HFC-134a in China and Its Four Cities. Environ. Sci. Technol. 57, 4732-4740 (2023)."
+2013,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,21.4,2.3,2.2,"Yi, L. et al. Atmospheric Observation and Emission of HFC-134a in China and Its Four Cities. Environ. Sci. Technol. 57, 4732-4740 (2023)."
+2014,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,24.2,2.6,2.6,"Yi, L. et al. Atmospheric Observation and Emission of HFC-134a in China and Its Four Cities. Environ. Sci. Technol. 57, 4732-4740 (2023)."
+2015,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,27.4,2.9,3,"Yi, L. et al. Atmospheric Observation and Emission of HFC-134a in China and Its Four Cities. Environ. Sci. Technol. 57, 4732-4740 (2023)."
+2016,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,31.7,3.4,3.4,"Yi, L. et al. Atmospheric Observation and Emission of HFC-134a in China and Its Four Cities. Environ. Sci. Technol. 57, 4732-4740 (2023)."
+2017,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,36.6,4,4,"Yi, L. et al. Atmospheric Observation and Emission of HFC-134a in China and Its Four Cities. Environ. Sci. Technol. 57, 4732-4740 (2023)."
+2018,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,42.1,4.5,4.7,"Yi, L. et al. Atmospheric Observation and Emission of HFC-134a in China and Its Four Cities. Environ. Sci. Technol. 57, 4732-4740 (2023)."
+2019,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,47.5,5,5.3,"Yi, L. et al. Atmospheric Observation and Emission of HFC-134a in China and Its Four Cities. Environ. Sci. Technol. 57, 4732-4740 (2023)."
+2020,China,HFC-134a,"Yi et al., 2023",Bottom-up Inventory,53,5.5,5.7,"Yi, L. et al. Atmospheric Observation and Emission of HFC-134a in China and Its Four Cities. Environ. Sci. Technol. 57, 4732-4740 (2023)."
+2005,China,HFC-134a,"Yokouchi et al., 2006",Top-down ISC CO tracer,3.9,2.4,2.4,"Yokouchi, Y. et al. High frequency measurements of HFCs at a remote site in east Asia and their implications for Chinese emissions. Geophys. Res. Lett. 33, 2006GL026403 (2006)."
+2008,China,HFC-134a,"Kim et al., 2010",Top-down ISC HCFC-22 tracer,8.7,2.2,3.3,"Kim, J. et al. Regional atmospheric emissions determined from measurements at Jeju Island, Korea: Halogenated compounds from China. Geophys. Res. Lett. 37, 2010GL043263 (2010)."
+2008,China,HFC-134a,"Li et al., 2011",Top-down ISC HCFC-22 tracer,8.3,2.1,2.7,"Li, S. et al. Emissions of Halogenated Compounds in East Asia Determined from Measurements at Jeju Island, Korea. Environ. Sci. Technol. 45, 5668-5675 (2011)."
+2009,China,HFC-134a,"Fang et al., 2012",Top-down ISC CO tracer,6.4,3,2.9,"Fang, X. et al. Estimates of major anthropogenic halocarbon emissions from China based on interspecies correlations. Atmos. Environ. 62, 26-33 (2012)."
+2009,China,HFC-134a,"Fang et al., 2012",Top-down ISC HCFC-22 tracer,5.7,1,1,"Fang, X. et al. Estimates of major anthropogenic halocarbon emissions from China based on interspecies correlations. Atmos. Environ. 62, 26-33 (2012)."
+2009,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,7.13,0.89418,0.89418,"Yi, L. et al. The atmospheric concentrations and emissions of major halocarbons in China during 2009-2019. Environ. Pollut. 284, 117190 (2021)."
+2010,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,9.7,1.02579,1.02579,"Yi, L. et al. The atmospheric concentrations and emissions of major halocarbons in China during 2009-2019. Environ. Pollut. 284, 117190 (2021)."
+2011,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,12,0.74189,0.74189,"Yi, L. et al. The atmospheric concentrations and emissions of major halocarbons in China during 2009-2019. Environ. Pollut. 284, 117190 (2021)."
+2012,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,17.5,1.16939,1.16939,"Yi, L. et al. The atmospheric concentrations and emissions of major halocarbons in China during 2009-2019. Environ. Pollut. 284, 117190 (2021)."
+2013,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,19.87,2.46871,2.46871,"Yi, L. et al. The atmospheric concentrations and emissions of major halocarbons in China during 2009-2019. Environ. Pollut. 284, 117190 (2021)."
+2014,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,20.86,1.64,1.64,"Yi, L. et al. The atmospheric concentrations and emissions of major halocarbons in China during 2009-2019. Environ. Pollut. 284, 117190 (2021)."
+2015,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,20.52,2.58479,2.58479,"Yi, L. et al. The atmospheric concentrations and emissions of major halocarbons in China during 2009-2019. Environ. Pollut. 284, 117190 (2021)."
+2016,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,22.24,2.92129,2.92129,"Yi, L. et al. The atmospheric concentrations and emissions of major halocarbons in China during 2009-2019. Environ. Pollut. 284, 117190 (2021)."
+2017,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,19.83,1.62161,1.62161,"Yi, L. et al. The atmospheric concentrations and emissions of major halocarbons in China during 2009-2019. Environ. Pollut. 284, 117190 (2021)."
+2018,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,15.7,1.43711,1.43711,"Yi, L. et al. The atmospheric concentrations and emissions of major halocarbons in China during 2009-2019. Environ. Pollut. 284, 117190 (2021)."
+2019,China,HFC-134a,"Yi et al., 2021",Top-down ISC HCFC-22 tracer,19.71,1.86261,1.86261,"Yi, L. et al. The atmospheric concentrations and emissions of major halocarbons in China during 2009-2019. Environ. Pollut. 284, 117190 (2021)."
+2005,China,HFC-134a,"Stohl et al., 2009",Top-down Inverse Modeling,9.8,,,"Stohl, A. et al. An analytical inversion method for determining regional and global emissions of greenhouse gases: Sensitivity studies and application to halocarbons. Atmos. Chem. Phys. 9, 1597-1620 (2009)."
+2006,China,HFC-134a,"Stohl et al., 2009",Top-down Inverse Modeling,11.9,,,"Stohl, A. et al. An analytical inversion method for determining regional and global emissions of greenhouse gases: Sensitivity studies and application to halocarbons. Atmos. Chem. Phys. 9, 1597-1620 (2009)."
+2008,China,HFC-134a,"Stohl et al., 2010",Top-down Inverse Modeling,12.9,1.7,1.7,"Stohl, A. et al. Hydrochlorofluorocarbon and hydrofluorocarbon emissions in East Asia determined by inverse modeling. Atmos. Chem. Phys. 10, 3545-3560 (2010)."
+2011,China,HFC-134a,"Lunt et al., 2015",Top-down Inverse Modeling,12.25,7.38,8.65,"Lunt, M. F. et al. Reconciling reported and unreported HFC emissions with atmospheric observations. PNAS 112, 5927-5931 (2015)."
+2005,China,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,9,3,3,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2006,China,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,3,3,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2007,China,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,15,3,3,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2008,China,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,20,3,3,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2009,China,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,20,3,3,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2010,China,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,21,4,4,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2011,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,19.478,2.529,2.529,"Yao, B. et al. China's Hydrofluorocarbon Emissions for 2011-2017 Inferred from Atmospheric Measurements. Environ. Sci. Technol. Lett. 6, 479-486 (2019)."
+2012,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,15.489,5.814,5.814,"Yao, B. et al. China's Hydrofluorocarbon Emissions for 2011-2017 Inferred from Atmospheric Measurements. Environ. Sci. Technol. Lett. 6, 479-486 (2019)."
+2013,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,23.648,8.913,8.913,"Yao, B. et al. China's Hydrofluorocarbon Emissions for 2011-2017 Inferred from Atmospheric Measurements. Environ. Sci. Technol. Lett. 6, 479-486 (2019)."
+2014,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,27.228,6.066,6.066,"Yao, B. et al. China's Hydrofluorocarbon Emissions for 2011-2017 Inferred from Atmospheric Measurements. Environ. Sci. Technol. Lett. 6, 479-486 (2019)."
+2015,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,32.413,8.141,8.141,"Yao, B. et al. China's Hydrofluorocarbon Emissions for 2011-2017 Inferred from Atmospheric Measurements. Environ. Sci. Technol. Lett. 6, 479-486 (2019)."
+2016,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,29.763,5.95,5.95,"Yao, B. et al. China's Hydrofluorocarbon Emissions for 2011-2017 Inferred from Atmospheric Measurements. Environ. Sci. Technol. Lett. 6, 479-486 (2019)."
+2017,China,HFC-134a,"Yao et al., 2019",Top-down Inverse Modeling,24.52,2.682,2.682,"Yao, B. et al. China's Hydrofluorocarbon Emissions for 2011-2017 Inferred from Atmospheric Measurements. Environ. Sci. Technol. Lett. 6, 479-486 (2019)."
+2022,China,HFC-134a,"Hu et al., 2025",Top-down Inverse Modeling,42.63158,5.26316,5.26316,"Hu, X. et al. Sustained Increases in Hydrofluorocarbon Emissions from China and Implications for Global Emissions. Environ. Sci. Technol. 59, 3024-3033 (2025)."
+2018,China,HFC-134a,"Ma at al., 2025",Top-down Inverse Modeling,30.5,4.8,4.8,"Ma, M. et al. Emissions of HFC-134a in China and Reconciliation of Discrepancies between Observation-Based and Inventory-Based Emission Estimates. Environ. Sci. Technol. 59, 8506-8515 (2025)."
+2019,China,HFC-134a,"Ma at al., 2025",Top-down Inverse Modeling,28.4,4.8,4.8,"Ma, M. et al. Emissions of HFC-134a in China and Reconciliation of Discrepancies between Observation-Based and Inventory-Based Emission Estimates. Environ. Sci. Technol. 59, 8506-8515 (2025)."
+2020,China,HFC-134a,"Ma at al., 2025",Top-down Inverse Modeling,33.1,7.5,7.5,"Ma, M. et al. Emissions of HFC-134a in China and Reconciliation of Discrepancies between Observation-Based and Inventory-Based Emission Estimates. Environ. Sci. Technol. 59, 8506-8515 (2025)."
+2008,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.12,1.27,1.27,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2009,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.45,1.45,1.45,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2010,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.76,1.65,1.65,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2011,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.2,1.47,1.47,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2012,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,5.98,1.4,1.4,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2013,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.75,1.71,1.71,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2014,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.76,1.7,1.7,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2015,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,6.59,1.72,1.72,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2016,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,8.16,2.38,2.38,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2017,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,11.46,2.73,2.73,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2018,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,12.35,2.45,2.45,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2019,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,10.83,2.18,2.18,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2020,Japan,HFC-134a,"Choi et al., 2024",Top-down Inverse Modeling,9.89,1.89,1.89,"Choi, H. et al. Revealing the significant acceleration of hydrofluorocarbon (HFC) emissions in eastern Asia through long-term atmospheric observations. Atmos. Chem. Phys. 24, 7309-7330 (2024)."
+2010,Japan,HFC-134a,"Saito et al., 2015",Top-down Inverse Modeling,3.1,0.1,0.2,"Saito, T. et al. Extraordinary halocarbon emissions initiated by the 2011 Tohoku earthquake. Geophys. Res. Lett. 42, 2500-2507 (2015)."
+2011,Japan,HFC-134a,"Saito et al., 2015",Top-down Inverse Modeling,4.1,0.1,0.2,"Saito, T. et al. Extraordinary halocarbon emissions initiated by the 2011 Tohoku earthquake. Geophys. Res. Lett. 42, 2500-2507 (2015)."
+2012,Japan,HFC-134a,"Saito et al., 2015",Top-down Inverse Modeling,2.4,0.3,0.2,"Saito, T. et al. Extraordinary halocarbon emissions initiated by the 2011 Tohoku earthquake. Geophys. Res. Lett. 42, 2500-2507 (2015)."
+2005,Japan,HFC-134a,"Stohl et al., 2009",Top-down Inverse Modeling,5.3,,,"Stohl, A. et al. An analytical inversion method for determining regional and global emissions of greenhouse gases: Sensitivity studies and application to halocarbons. Atmos. Chem. Phys. 9, 1597-1620 (2009)."
+2006,Japan,HFC-134a,"Stohl et al., 2009",Top-down Inverse Modeling,4,,,"Stohl, A. et al. An analytical inversion method for determining regional and global emissions of greenhouse gases: Sensitivity studies and application to halocarbons. Atmos. Chem. Phys. 9, 1597-1620 (2009)."
+2008,Japan,HFC-134a,"Stohl et al., 2010",Top-down Inverse Modeling,3.1,0.2,0.2,"Stohl, A. et al. Hydrochlorofluorocarbon and hydrofluorocarbon emissions in East Asia determined by inverse modeling. Atmos. Chem. Phys. 10, 3545-3560 (2010)."
+2008,Japan,HFC-134a,"Li et al., 2011",Top-down Inverse Modeling,4.7,0.2,0.3,"Li, S. et al. Emissions of Halogenated Compounds in East Asia Determined from Measurements at Jeju Island, Korea. Environ. Sci. Technol. 45, 5668-5675 (2011)."
+1995,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,2,1,1,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+1996,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,4,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+1997,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,6,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+1998,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,8,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+1999,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,9,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2000,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,10,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2001,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,11,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2002,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2003,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,13,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2004,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2005,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,13,4,4,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2006,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2007,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2008,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2009,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,11,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2010,Japan,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,12,2,2,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2008,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,49.14,11.05,11.05,"Hu, L. et al. Considerable contribution of the Montreal Protocol to declining greenhouse gas emissions from the United States. Geophys. Res. Lett. 44, 8075-8083 (2017)."
+2009,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,42.11,9.59,9.59,"Hu, L. et al. Considerable contribution of the Montreal Protocol to declining greenhouse gas emissions from the United States. Geophys. Res. Lett. 44, 8075-8083 (2017)."
+2010,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,49.81,6.46,6.46,"Hu, L. et al. Considerable contribution of the Montreal Protocol to declining greenhouse gas emissions from the United States. Geophys. Res. Lett. 44, 8075-8083 (2017)."
+2011,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,40.45,6.9,6.9,"Hu, L. et al. Considerable contribution of the Montreal Protocol to declining greenhouse gas emissions from the United States. Geophys. Res. Lett. 44, 8075-8083 (2017)."
+2012,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,37.63,3.23,3.23,"Hu, L. et al. Considerable contribution of the Montreal Protocol to declining greenhouse gas emissions from the United States. Geophys. Res. Lett. 44, 8075-8083 (2017)."
+2013,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,40.8,5.19,5.19,"Hu, L. et al. Considerable contribution of the Montreal Protocol to declining greenhouse gas emissions from the United States. Geophys. Res. Lett. 44, 8075-8083 (2017)."
+2014,USA,HFC-134a,"Hu et al., 2017",Top-down Inverse Modeling,42.81,5.97,5.97,"Hu, L. et al. Considerable contribution of the Montreal Protocol to declining greenhouse gas emissions from the United States. Geophys. Res. Lett. 44, 8075-8083 (2017)."
+2005,USA,HFC-134a,"Stohl et al., 2009",Top-down Inverse Modeling,34.8,,,"Stohl, A. et al. An analytical inversion method for determining regional and global emissions of greenhouse gases: Sensitivity studies and application to halocarbons. Atmos. Chem. Phys. 9, 1597-1620 (2009)."
+2006,USA,HFC-134a,"Stohl et al., 2009",Top-down Inverse Modeling,28.1,,,"Stohl, A. et al. An analytical inversion method for determining regional and global emissions of greenhouse gases: Sensitivity studies and application to halocarbons. Atmos. Chem. Phys. 9, 1597-1620 (2009)."
+2005,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,38.7,5.9,5.9,"Simmonds, P. G. et al. USA emissions estimates of CH3CHF2, CH2FCF3, CH3CF3 and CH2F2 based on in situ observations at Mace Head. Atmos. Environ. 104, 27-38 (2015)."
+2006,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,37.8,6.4,6.4,"Simmonds, P. G. et al. USA emissions estimates of CH3CHF2, CH2FCF3, CH3CF3 and CH2F2 based on in situ observations at Mace Head. Atmos. Environ. 104, 27-38 (2015)."
+2007,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,37.5,8.7,8.7,"Simmonds, P. G. et al. USA emissions estimates of CH3CHF2, CH2FCF3, CH3CF3 and CH2F2 based on in situ observations at Mace Head. Atmos. Environ. 104, 27-38 (2015)."
+2008,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,44.6,9.5,9.5,"Simmonds, P. G. et al. USA emissions estimates of CH3CHF2, CH2FCF3, CH3CF3 and CH2F2 based on in situ observations at Mace Head. Atmos. Environ. 104, 27-38 (2015)."
+2009,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,48.1,7.4,7.4,"Simmonds, P. G. et al. USA emissions estimates of CH3CHF2, CH2FCF3, CH3CF3 and CH2F2 based on in situ observations at Mace Head. Atmos. Environ. 104, 27-38 (2015)."
+2010,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,62,16.9,16.9,"Simmonds, P. G. et al. USA emissions estimates of CH3CHF2, CH2FCF3, CH3CF3 and CH2F2 based on in situ observations at Mace Head. Atmos. Environ. 104, 27-38 (2015)."
+2011,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,66.8,15.3,15.3,"Simmonds, P. G. et al. USA emissions estimates of CH3CHF2, CH2FCF3, CH3CF3 and CH2F2 based on in situ observations at Mace Head. Atmos. Environ. 104, 27-38 (2015)."
+2012,USA,HFC-134a,"Simmonds et al., 2015",Top-down Inverse Modeling,69.6,18.4,18.4,"Simmonds, P. G. et al. USA emissions estimates of CH3CHF2, CH2FCF3, CH3CF3 and CH2F2 based on in situ observations at Mace Head. Atmos. Environ. 104, 27-38 (2015)."
+1995,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,10,2,2,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+1996,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,17,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+1997,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,23,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+1998,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,31,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+1999,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,35,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2000,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,36,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2001,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,42,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2002,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,47,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2003,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,50,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2004,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,54,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2005,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,57,9,9,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2006,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,55,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2007,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,61,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2008,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,60,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2009,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,59,0,0,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
+2010,USA,HFC-134a,"Fortems-Cheiney et al., 2015",Top-down Inverse Modeling,71,11,11,"Fortems-Cheiney, A. et al. Increase in HFC-134a emissions in response to the success of the Montreal Protocol. J. Geophys. Res. 120, 11,728-11,742 (2015)."
