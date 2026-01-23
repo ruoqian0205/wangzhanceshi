@@ -1078,30 +1078,33 @@ function renderComparisonChart() {
         yearRange.push(y);
     }
 
-    // 3. 初始化图表
-    let chart = echarts.getInstanceByDom(chartDom);
-    if (chart) { chart.dispose(); }
-    chart = echarts.init(chartDom);
-
-    // 4. 数据过滤
+    // 3. 数据过滤（第一步：基础过滤）
     let filtered = comparisonData.filter(d =>
-        d.substance === substance &&
-        d.region === region &&
-        d.year >= sYear &&
-        d.year <= eYear
+        (d.substance === substance || d.Substance === substance) &&
+        (d.region === region || d.Region === region) &&
+        (parseInt(d.year || d.Year) >= sYear) &&
+        (parseInt(d.year || d.Year) <= eYear)
     );
 
-// ============= 新增：调用对比页面参考文献表格更新 =============
-updateComparisonReferenceTable(filtered);
-
+    // 4. 数据过滤（第二步：方法分类过滤）
     if (methodFilter !== 'All') {
         filtered = filtered.filter(d => {
-            const m = (d.method || "").toLowerCase();
+            const m = (d.method || d.Method || "").toLowerCase();
             if (methodFilter === 'Bottom-up') return m.includes('bottom-up');
             if (methodFilter === 'Top-down') return m.includes('inverse') || m.includes('isc');
             return true;
         });
     }
+
+    // ============= 核心修正：调用统一的表格更新函数 =============
+    // 不再在 renderComparisonChart 内部手动拼凑 tableHTML，避免覆盖冲突
+    updateComparisonReferenceTable(filtered);
+    // =========================================================
+
+    // 5. 初始化图表
+    let chart = echarts.getInstanceByDom(chartDom);
+    if (chart) { chart.dispose(); }
+    chart = echarts.init(chartDom);
 
     if (filtered.length === 0) {
         chart.setOption({
@@ -1114,39 +1117,32 @@ updateComparisonReferenceTable(filtered);
         return;
     }
 
-    // 5. 构造 Series
-    const datasets = [...new Set(filtered.map(d => d.dataset))];
+    // 6. 构造 Series（用于 ECharts）
+    const datasets = [...new Set(filtered.map(d => d.dataset || d.study || d.Name))];
     let series = [];
-    let tableHTML = "";
     let allValuesForScale = [0];
 
     datasets.forEach(name => {
-        const rows = filtered.filter(d => d.dataset === name);
+        const rows = filtered.filter(d => (d.dataset || d.study || d.Name) === name);
         const lineData = [];
         const errorData = [];
-        const method = rows[0]?.method || "Unknown";
+        const method = rows[0]?.method || rows[0]?.Method || "Unknown";
 
         yearRange.forEach((y, idx) => {
-            const r = rows.find(d => d.year === y);
+            const r = rows.find(d => parseInt(d.year || d.Year) === y);
             if (!r) {
                 lineData.push(null);
                 return;
             }
 
             const val = r.value ?? r.mean ?? r.Mean;
-            // 核心修改：读取正负误差值
             const errPos = parseFloat(r.err_pos || r.ErrPos || 0);
             const errNeg = parseFloat(r.err_neg || r.ErrNeg || 0);
 
             if (val !== undefined && val !== null) {
-                lineData.push({
-                    value: val,
-                    errPos: errPos,
-                    errNeg: errNeg
-                });
+                lineData.push({ value: val, errPos: errPos, errNeg: errNeg });
                 allValuesForScale.push(val);
 
-                // 构造非对称误差坐标：[x索引, 下限, 上限]
                 if (errPos > 0 || errNeg > 0) {
                     const upper = val + errPos;
                     const lower = val - errNeg;
@@ -1158,7 +1154,6 @@ updateComparisonReferenceTable(filtered);
             }
         });
 
-        // 添加主折线
         series.push({
             name: name,
             type: "line",
@@ -1169,7 +1164,6 @@ updateComparisonReferenceTable(filtered);
             z: 20
         });
 
-        // 添加非对称误差棒
         if (errorData.length > 0) {
             series.push({
                 type: "custom",
@@ -1179,15 +1173,13 @@ updateComparisonReferenceTable(filtered);
                     const low = api.coord([xIndex, api.value(1)]);
                     const high = api.coord([xIndex, api.value(2)]);
                     const half = 4;
-                    const style = api.style({
-                        stroke: api.visual('color'), lineWidth: 1.5, fill: null
-                    });
+                    const style = api.style({ stroke: api.visual('color'), lineWidth: 1.5, fill: null });
                     return {
                         type: 'group',
                         children: [
-                            { type: 'line', shape: { x1: high[0], y1: high[1], x2: low[0], y2: low[1] }, style }, // 垂直主线
-                            { type: 'line', shape: { x1: high[0] - half, y1: high[1], x2: high[0] + half, y2: high[1] }, style }, // 顶部横线
-                            { type: 'line', shape: { x1: low[0] - half, y1: low[1], x2: low[0] + half, y2: low[1] }, style }    // 底部横线
+                            { type: 'line', shape: { x1: high[0], y1: high[1], x2: low[0], y2: low[1] }, style },
+                            { type: 'line', shape: { x1: high[0] - half, y1: high[1], x2: high[0] + half, y2: high[1] }, style },
+                            { type: 'line', shape: { x1: low[0] - half, y1: low[1], x2: low[0] + half, y2: low[1] }, style }
                         ]
                     };
                 },
@@ -1196,16 +1188,16 @@ updateComparisonReferenceTable(filtered);
                 tooltip: { show: false }
             });
         }
+    });
 
-
-    // 6. 坐标轴范围计算
+    // 7. Y轴范围计算
     const rawMax = Math.max(...allValuesForScale);
     const splitNumber = 5;
     let interval = Math.ceil((rawMax || 100) / splitNumber / 5) * 5;
     if (interval === 0) interval = 10;
     const yMax = interval * splitNumber;
 
-    // 7. 设置配置项
+    // 8. 设置图表配置
     chart.setOption({
         title: { text: `${substance} Emission Comparison (${region})`, left: "center", top: 10 },
         tooltip: {
@@ -1216,7 +1208,6 @@ updateComparisonReferenceTable(filtered);
                 params.forEach(p => {
                     if (p.seriesType === 'line' && p.data && p.data.value !== null) {
                         const d = p.data;
-                        // 优化 Tooltip 显示：4 (+1.5/-2.0)
                         const errInfo = (d.errPos || d.errNeg) 
                             ? `<span style="font-size:0.9em; color:#666;"> (+${d.errPos}/-${d.errNeg})</span>` 
                             : "";
@@ -1244,6 +1235,10 @@ updateComparisonReferenceTable(filtered);
     });
 }
 
+/**
+ * 辅助函数：更新页面下方的参考文献表格
+ * 修复了字段错位、Year不显示、Reference不显示的问题
+ */
 function updateComparisonReferenceTable(data) {
     const tableBody = document.getElementById("comp-table-body");
     if (!tableBody) return;
@@ -1251,21 +1246,21 @@ function updateComparisonReferenceTable(data) {
     tableBody.innerHTML = "";
 
     if (!data || data.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400">No data available for the selected filters.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-gray-400">No references available.</td></tr>`;
         return;
     }
 
     const groups = {};
 
     data.forEach(item => {
-        // --- 核心修正：自动适配多种可能的键名 ---
+        // 兼容性字段提取：解决大小写不一致导致的读取失败
         const name = item.dataset || item.study || item.Name || "Unknown";
         const substance = item.substance || item.Substance || item.gas || "N/A";
         const region = item.region || item.Region || "Global";
         const citation = item.citation || item.Citation || item.reference || "Reference not provided";
         const rawYear = item.year || item.Year;
 
-        // 生成唯一分组键
+        // 以 Study+物质+区域 作为分组基准，合并不同年份
         const groupKey = `${name}|${substance}|${region}`;
         
         if (!groups[groupKey]) {
@@ -1278,16 +1273,12 @@ function updateComparisonReferenceTable(data) {
             };
         }
 
-        // 确保年份是有效数字
         if (rawYear) {
             const parsedYear = parseInt(rawYear);
-            if (!isNaN(parsedYear)) {
-                groups[groupKey].years.push(parsedYear);
-            }
+            if (!isNaN(parsedYear)) groups[groupKey].years.push(parsedYear);
         }
     });
 
-    // 处理年份范围
     const summaryData = Object.values(groups).map(group => {
         let yearRange = "N/A";
         if (group.years.length > 0) {
@@ -1298,10 +1289,9 @@ function updateComparisonReferenceTable(data) {
         return { ...group, yearRange };
     });
 
-    // 按名称排序
     summaryData.sort((a, b) => a.name.localeCompare(b.name));
 
-    // 渲染行
+    // 严格按照 HTML <thead> 顺序渲染：Study, Substance, Region, Year, Reference
     summaryData.forEach(row => {
         const tr = document.createElement("tr");
         tr.className = "hover:bg-gray-50 transition-colors border-b border-gray-100";
@@ -1311,7 +1301,7 @@ function updateComparisonReferenceTable(data) {
             <td class="px-6 py-4 text-gray-700">${row.substance}</td>
             <td class="px-6 py-4 text-gray-700">${row.region}</td>
             <td class="px-6 py-4 text-gray-500 font-medium">${row.yearRange}</td>
-            <td class="px-6 py-4 italic text-gray-600 text-sm" style="max-width: 300px; overflow-wrap: break-word;">${row.citation}</td>
+            <td class="px-6 py-4 italic text-gray-600 text-sm" style="max-width: 400px; overflow-wrap: break-word;">${row.citation}</td>
         `;
         tableBody.appendChild(tr);
     });
