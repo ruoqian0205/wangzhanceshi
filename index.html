@@ -1197,8 +1197,6 @@ updateComparisonReferenceTable(filtered);
             });
         }
 
-        tableHTML += `<tr><td class="px-6 py-4">${name}</td><td class="px-6 py-4">${method}</td><td class="px-6 py-4">${sYear}-${eYear}</td></tr>`;
-    });
 
     // 6. 坐标轴范围计算
     const rawMax = Math.max(...allValuesForScale);
@@ -1206,9 +1204,6 @@ updateComparisonReferenceTable(filtered);
     let interval = Math.ceil((rawMax || 100) / splitNumber / 5) * 5;
     if (interval === 0) interval = 10;
     const yMax = interval * splitNumber;
-
-    const tableBody = document.getElementById("comp-table-body");
-    if (tableBody) tableBody.innerHTML = tableHTML;
 
     // 7. 设置配置项
     chart.setOption({
