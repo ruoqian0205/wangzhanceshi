@@ -283,7 +283,7 @@
         <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Substance</label>
         <select id="comp-substance" class="w-full border p-2 rounded text-sm h-[38px] bg-white">
             <option value="" disabled selected>-- Select Substance --</option>
-            <option>CFC-11</option><option>CFC-12</option><option>HCFC-22</option><option>HCFC-141b</option><option>HCFC-142b</option><option>HFC-134a</option>
+            <option>CFC-11</option><option>CFC-12</option><option>CFC-113</option><option>HCFC-22</option><option>HCFC-141b</option><option>HCFC-142b</option><option>HFC-134a</option>
             <option>HFC-143a</option><option>HFC-32</option><option>HFC-125</option><option>HFC-152a</option>
         </select>
     </div>
@@ -291,7 +291,7 @@
     <div>
         <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Region</label>
         <select id="comp-region" class="w-full border p-2 rounded text-sm h-[38px] bg-white">
-            <option value="" disabled selected>-- Select Region --</option><option>China</option><option>USA</option><option>Europe</option><option>Western Europe</option><option>Central Europe</option>
+            <option value="" disabled selected>-- Select Region --</option><option>China</option><option>Eastern China</option><option>USA</option><option>US East</option><option>US Midwest</option><option>US West</option><option>Europe</option><option>Western Europe</option><option>Northwestern Europe</option><option>Central Europe</option>
             <option>South Korea</option><option>Japan</option><option>Western Japan</option><option>Australia</option><option>Global</option>
         </select>
     </div>
@@ -474,6 +474,7 @@
     let authMode = 'login';
 
     const yearsRange = Array.from({length: 45}, (_, i) => 1980 + i);
+    const myExtendedColors = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc', '#2f4554', '#61a0a8', '#d48265'];
 
     // 1. Data Loading
     async function loadData() {
@@ -712,6 +713,7 @@ function updateInventoryChart(type) {
     );
 
     let option = {
+        color: myExtendedColors,
         title: { left: "center", top: 0, textStyle: { fontSize: 16 } },
         tooltip: { trigger: "axis", confine: true },
         legend: { bottom: 0, padding: [5, 10] },
@@ -941,7 +943,8 @@ function renderInversionChart() {
 
     // 6. 设置图表最终 Option
     chart.setOption({
-        title: { 
+        color: myExtendedColors,
+         title: { 
             text: `${substance} Inversion Emissions (${region})`, 
             left: "center",
             top: 10 
@@ -1200,6 +1203,7 @@ function renderComparisonChart() {
 
     // 8. 设置图表配置
     chart.setOption({
+        color: myExtendedColors,
         title: { text: `${substance} Emission Comparison (${region})`, left: "center", top: 10 },
         tooltip: {
             trigger: "axis",
