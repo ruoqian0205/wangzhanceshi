@@ -280,7 +280,7 @@
 
     <div>
         <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Substance</label>
-        <select id="comp-substance" class="w-full border p-2 rounded text-sm h-[38px] bg-white">
+        <select id="comp-substance" onchange="handleCompSubstanceChange()" class="w-full border p-2 rounded text-sm h-[38px] bg-white">
             <option value="" disabled selected>-- Select Substance --</option>
             <option>CFC-11</option><option>CFC-12</option><option>CFC-113</option><option>CFC-13</option><option>CFC-114</option><option>CFC-115</option><option>HCFC-22</option><option>HCFC-141b</option><option>HCFC-142b</option><option>HCFC-124</option><option>HCFC-133a</option><option>HCFC-132b</option><option>HFC-134a</option>
             <option>HFC-143a</option><option>HFC-32</option><option>HFC-125</option><option>HFC-152a</option><option>HFC-23</option><option>HFC-227ea</option><option>HFC-236fa</option><option>HFC-245fa</option><option>HFC-365mfc</option><option>HFC-4310mee</option><option>SF6</option><option>NF3</option><option>CF4</option><option>C2F6</option><option>C3F8</option><option>c-C4F8</option>
@@ -289,11 +289,10 @@
     </div>
 
     <div>
-        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Region</label>
-        <select id="comp-region" class="w-full border p-2 rounded text-sm h-[38px] bg-white">
-            <option value="" disabled selected>-- Select Region --</option><option>China</option><option>Eastern China</option><option>Northern China</option><option>China (Yangtze River Delta)</option><option>USA</option><option>US East</option><option>US Midwest</option><option>US West</option><option>Europe</option><option>Western Europe</option><option>Northwestern Europe</option><option>Central Europe</option>
-            <option>South Korea</option><option>Japan</option><option>Western Japan</option><option>Australia</option><option>India</option><option>East Asia</option><option>Global</option>
-        </select>
+    <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Region</label>
+    <select id="comp-region" class="w-full border p-2 rounded text-sm h-[38px] bg-white">
+        <option value="" disabled selected>Please select Substance first</option>
+    </select>
     </div>
 
     <div>
@@ -1060,6 +1059,38 @@ function updateReferenceTable(data) {
 }
 
 // 7. Chart Logic - Comparison (支持非对称误差棒)
+
+// 当比较页面的物质选择改变时，更新地区下拉框
+function handleCompSubstanceChange() {
+    const selectedSubstance = document.getElementById('comp-substance').value;
+    const regionSelect = document.getElementById('comp-region');
+    
+    // 1. 如果没有选择物质，重置地区下拉框
+    if (!selectedSubstance) {
+        regionSelect.innerHTML = '<option value="" disabled selected>-- Select Region --</option>';
+        return;
+    }
+
+    // 2. 从 comparisonData 中过滤出该物质对应的所有唯一地区
+    // 注意：确保 CSV 中的列名是 'substance' 和 'region'
+    const availableRegions = [...new Set(comparisonData
+        .filter(d => d.substance === selectedSubstance)
+        .map(d => d.region)
+    )].sort(); // 排序以便更好查找
+
+    // 3. 更新地区下拉框的内容
+    let optionsHtml = '<option value="" disabled selected>-- Select Region --</option>';
+    if (availableRegions.length > 0) {
+        availableRegions.forEach(reg => {
+            optionsHtml += `<option value="${reg}">${reg}</option>`;
+        });
+    } else {
+        optionsHtml += '<option value="">No regions available</option>';
+    }
+    
+    regionSelect.innerHTML = optionsHtml;
+}
+
 function renderComparisonChart() {
     const chartDom = document.getElementById("comparison-chart");
     if (!chartDom) return;
