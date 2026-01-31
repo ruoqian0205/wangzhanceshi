@@ -1107,6 +1107,26 @@ function updateReferenceTable(data) {
 
 // 7. Chart Logic - Comparison (支持非对称误差棒)
 
+function handleInvFilterChange() {
+    const sub = document.getElementById('inv-substance').value;
+    const reg = document.getElementById('inv-country').value;
+    
+    // 只有当两个都选了才开始处理
+    if (sub && reg) {
+        // 1. 从反演数据源筛选符合当前物质和地区的数据
+        const filtered = inversionData.filter(d => 
+            (d.substance === sub || d.Substance === sub) && 
+            (d.country === reg || d.Region === reg || d.region === reg)
+        );
+        
+        // 2. 自动更新该页面的年份选择器
+        updateYearSelects(filtered, 'inv-start-year', 'inv-end-year');
+        
+        // 3. 立即重新渲染图表
+        renderInversionChart();
+    }
+}
+
 // 当比较页面的物质选择改变时，更新地区下拉框
 function handleCompSubstanceChange() {
     const selectedSubstance = document.getElementById('comp-substance').value;
