@@ -144,7 +144,7 @@
                 <select id="reference-select" class="w-full border rounded-lg p-2 text-sm"></select>
             </div>
             <div class="flex items-end space-x-2">
-    <button id="btn-line" onclick="setActiveButton('btn-line'); updateInventoryChart('line')" 
+   <button id="btn-line" onclick="setActiveButton('btn-line'); updateInventoryChart('line')" 
             class="chart-btn flex-1 bg-gray-200 text-gray-800 text-xs font-bold py-2.5 rounded hover:bg-gray-300 transition uppercase">
         Total (Line)
     </button>
@@ -649,36 +649,17 @@ function setActiveButton(activeId) {
 function handleMainFilterChange() {
     const substance = document.getElementById('substance-select').value;
     const region = document.getElementById('region-select').value;
-    
-// 重置所有按钮颜色为灰色 (初始态)
-    const buttons = document.querySelectorAll('.chart-btn');
-    buttons.forEach(btn => {
-        btn.classList.remove('bg-blue-900', 'text-white', 'hover:bg-black');
-        btn.classList.add('bg-gray-200', 'text-gray-800', 'hover:bg-gray-300');
-    });
 
+    if (!substance || !region) return;
 
-    // 如果还没选好，清空下拉框和表格，不画图
-    if (!substance || !region) {
-        syncReferenceDropdown("", ""); 
-        updatePublicationTable("", "");
-        // 可选：清空图表
-        const chartDom = document.getElementById('inventory-chart');
-        let chart = echarts.getInstanceByDom(chartDom);
-        if (chart) chart.clear(); 
-        return;
+    // 1. 仅更新年份和下拉框，不画图
+    const filtered = inventoryData.filter(d => d.substance === substance && d.region === region);
+    if (typeof updateYearSelects === 'function') {
+        updateYearSelects(filtered, 'start-year', 'end-year');
     }
-
-const filtered = inventoryData.filter(d => d.substance === substance && d.region === region);
-    
-    // 自动更新年份选择器 [cite: 303, 311]
-    updateYearSelects(filtered, 'start-year', 'end-year');
 
     syncReferenceDropdown(substance, region);
     updatePublicationTable(substance, region);
-    
-    // 选好后自动画图（默认折线图）
-    updateInventoryChart('line');
 }
 
 // 3. 同步研究来源下拉框
