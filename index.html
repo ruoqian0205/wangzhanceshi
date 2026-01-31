@@ -201,7 +201,7 @@
         <div class="grid md:grid-cols-5 gap-4 mb-6">
             <div>
                 <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Substance</label>
-                <select id="inv-substance" class="w-full border p-2 rounded text-sm">
+                <select id="inv-substance" onchange="handleInvFilterChange()" class="w-full border p-2 rounded text-sm">
                     <option value="" disabled selected>-- Select Substance --</option><option>CFC-12</option>
                     <option>HCFC-22</option><option>HCFC-141b</option><option>HCFC-142b</option><option>HCFC-124</option>
                     <option>HFC-134a</option><option>HFC-143a</option><option>HFC-32</option>
@@ -211,7 +211,7 @@
 
             <div>
                 <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Region</label>
-                <select id="inv-country" class="w-full border p-2 rounded text-sm">
+                <select id="inv-country" onchange="handleInvFilterChange()" class="w-full border p-2 rounded text-sm">
                     <option value="" disabled selected>-- Select Region --</option><option>China</option><option>Northern China</option><option>Eastern China</option>
                 </select>
             </div>
@@ -290,7 +290,7 @@
 
     <div>
     <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Region</label>
-    <select id="comp-region" class="w-full border p-2 rounded text-sm h-[38px] bg-white">
+    <select id="comp-region" onchange="updateComparisonYearRange(); renderComparisonChart();" ...>
         <option value="" disabled selected>Please select Substance first</option>
     </select>
     </div>
@@ -307,7 +307,7 @@
 
     <div>
         <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Method Category</label>
-        <select id="comp-method-filter" class="w-full border p-2 rounded text-sm h-[38px] bg-white">
+        <select id="comp-method-filter" onchange="updateComparisonYearRange(); renderComparisonChart();" ...>
             <option value="All">All Methods</option>
             <option value="Bottom-up">Bottom-up</option>
             <option value="Top-down">Top-down (Inverse Modeling/ISC)</option>
@@ -472,8 +472,37 @@
     let currentInvChartType = 'line';
     let authMode = 'login';
 
-    const yearsRange = Array.from({length: 45}, (_, i) => 1980 + i);
     const myExtendedColors = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc', '#2f4554', '#61a0a8', '#d48265'];
+
+// 通用函数：根据提供的数据数组更新年份下拉框
+function updateYearSelects(data, startSelectId, endSelectId) {
+    const startSelect = document.getElementById(startSelectId);
+    const endSelect = document.getElementById(endSelectId);
+    if (!data || data.length === 0 || !startSelect || !endSelect) return;
+
+    // 1. 提取数据中的所有年份
+    const years = data.map(d => parseInt(d.year)).filter(y => !isNaN(y));
+    if (years.length === 0) return;
+
+    const minYear = Math.min(...years);
+    const maxYear = Math.max(...years);
+
+    // 2. 设定显示范围：起始为 min-1, 终止为 max+1 [cite: 307]
+    const displayStart = minYear - 1;
+    const displayEnd = maxYear + 1;
+
+    // 3. 清空并填充下拉框
+    startSelect.innerHTML = '';
+    endSelect.innerHTML = '';
+    for (let y = displayStart; y <= displayEnd; y++) {
+        startSelect.add(new Option(y, y));
+        endSelect.add(new Option(y, y));
+    }
+
+    // 4. 设置初始状态：起始年份选最小值，终止年份选最大值 [cite: 307]
+    startSelect.value = displayStart;
+    endSelect.value = displayEnd;
+}
 
     // 1. Data Loading
     async function loadData() {
@@ -586,8 +615,6 @@
             s.add(new Option(y, y));
             e.add(new Option(y, y));
         });
-        s.value = 1980;
-        e.value = 2024;
     }
 
     // 5. Chart Logic - Inventory
@@ -639,6 +666,11 @@ function handleMainFilterChange() {
         if (chart) chart.clear(); 
         return;
     }
+
+const filtered = inventoryData.filter(d => d.substance === substance && d.region === region);
+    
+    // 自动更新年份选择器 [cite: 303, 311]
+    updateYearSelects(filtered, 'start-year', 'end-year');
 
     syncReferenceDropdown(substance, region);
     updatePublicationTable(substance, region);
@@ -792,6 +824,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
     // 6. Chart Logic - Inversion
+function handleInvFilterChange() {
+    const sub = document.getElementById('inv-substance').value;
+    const reg = document.getElementById('inv-country').value;
+    
+    if (sub && reg) {
+        // 1. 筛选出符合条件的反演数据 [cite: 288]
+        const filtered = inversionData.filter(d => d.substance === sub && d.country === reg);
+        
+        // 2. 调用通用函数自动更新反演部分的起始和终止年份 
+        updateYearSelects(filtered, 'inv-start-year', 'inv-end-year');
+    }
+}
+
 function renderInversionChart() {
     const chartDom = document.getElementById("inversion-chart");
     if (!chartDom) return;
@@ -1089,6 +1134,55 @@ function handleCompSubstanceChange() {
     }
     
     regionSelect.innerHTML = optionsHtml;
+
+updateComparisonYearRange();
+}
+
+function updateComparisonYearRange() {
+    const sub = document.getElementById("comp-substance").value;
+    const reg = document.getElementById("comp-region").value;
+    const methodFilter = document.getElementById("comp-method-filter").value;
+
+    if (!sub) return; // 至少需要选择物质
+
+    // 1. 过滤数据
+    let filtered = comparisonData.filter(d => 
+        (d.substance === sub || d.Substance === sub) &&
+        (!reg || d.region === reg || d.Region === reg) // 如果还没选地区，则看该物质全量
+    );
+
+    // 2. 如果选了方法，进一步过滤
+    if (methodFilter !== 'All') {
+        filtered = filtered.filter(d => {
+            const m = (d.method || d.Method || "").toLowerCase();
+            if (methodFilter === 'Bottom-up') return m.includes('bottom-up');
+            if (methodFilter === 'Top-down') return m.includes('inverse') || m.includes('isc');
+            return true;
+        });
+    }
+
+    // 3. 调用通用的 updateYearSelects 函数 (假设你已经按照之前的建议定义了它)
+    // 如果没有统一定义，请使用下方的代码：
+    const years = filtered.map(d => parseInt(d.year || d.Year)).filter(y => !isNaN(y));
+    if (years.length > 0) {
+        const minYear = Math.min(...years);
+        const maxYear = Math.max(...years);
+        
+        const startSelect = document.getElementById('comp-start-year');
+        const endSelect = document.getElementById('comp-end-year');
+        
+        // 清空并重新填充
+        startSelect.innerHTML = '';
+        endSelect.innerHTML = '';
+        for (let y = (minYear - 1); y <= (maxYear + 1); y++) {
+            startSelect.add(new Option(y, y));
+            endSelect.add(new Option(y, y));
+        }
+        
+        // 初始状态：1978 和 2024 (最小值-1 和 最大值+1)
+        startSelect.value = minYear - 1;
+        endSelect.value = maxYear + 1;
+    }
 }
 
 function renderComparisonChart() {
