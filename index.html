@@ -290,7 +290,7 @@
 
     <div>
     <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Region</label>
-    <select id="comp-region" onchange="updateComparisonYearRange(); renderComparisonChart();" ...>
+    <select id="comp-region" onchange="updateComparisonYearRange(); renderComparisonChart();" class="w-full border p-2 rounded text-sm h-[38px] bg-white">
         <option value="" disabled selected>Please select Substance first</option>
     </select>
     </div>
@@ -307,7 +307,7 @@
 
     <div>
         <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Method Category</label>
-        <select id="comp-method-filter" onchange="updateComparisonYearRange(); renderComparisonChart();" ...>
+        <select id="comp-method-filter" onchange="updateComparisonYearRange(); renderComparisonChart();" class="w-full border p-2 rounded text-sm h-[38px] bg-white">
             <option value="All">All Methods</option>
             <option value="Bottom-up">Bottom-up</option>
             <option value="Top-down">Top-down (Inverse Modeling/ISC)</option>
@@ -473,6 +473,8 @@
     let authMode = 'login';
 
     const myExtendedColors = ['#5470c6', '#91cc75', '#fac858', '#ee6666', '#73c0de', '#3ba272', '#fc8452', '#9a60b4', '#ea7ccc', '#2f4554', '#61a0a8', '#d48265'];
+    const currentYear = new Date().getFullYear();
+    const yearsRange = Array.from({length: currentYear - 1980 + 2}, (_, i) => 1980 + i);
 
 // 通用函数：根据提供的数据数组更新年份下拉框
 function updateYearSelects(data, startSelectId, endSelectId) {
