@@ -967,10 +967,23 @@ function renderInversionChart() {
     //const rawMax = Math.max(...allValues);
     //const interval = Math.ceil((rawMax || 10) / 5 / 2) * 2; 
     //const yMax = interval * 5;
-// --- 修改这里的逻辑 ---
+// 1. 找到包含标准差的最大原始值
 const rawMax = Math.max(...allValues);
-// 如果最大值很小（比如 0.7），我们给 15% 的余量；如果是 0，给个默认值 1
-const yMax = rawMax > 0 ? (rawMax * 1.15) : 1;
+
+// 2. 自动计算一个“漂亮”的最大值和间距
+// 逻辑：取 rawMax 的 1.1 倍，并向上取整到最接近的有效位数
+let smartMax;
+if (rawMax <= 0) {
+    smartMax = 1;
+} else {
+    // 找到数量级（如 0.1, 1, 10, 100）
+    const magnitude = Math.pow(10, Math.floor(Math.log10(rawMax)));
+    // 具体的步长：将最大值分为 5 份，并根据数量级向上取整
+    const approxStep = (rawMax * 1.1) / 5;
+    // 让步长变成 0.1, 0.2, 0.5, 1, 2, 5 这种整齐的数字
+    const step = Math.ceil(approxStep / (magnitude / 10)) * (magnitude / 10);
+    smartMax = step * 5; // 强制分为 5 个等间距
+}
 
     // 6. 设置图表最终 Option
     chart.setOption({
@@ -1017,18 +1030,21 @@ const yMax = rawMax > 0 ? (rawMax * 1.15) : 1;
     type: "value",
     name: "Gg yr⁻¹",
     min: 0,
-    // 使用上面计算出的包含标准差的最大值
-    max: parseFloat(yMax.toFixed(2)), 
-    
-    // 移除手动设置的 interval，让系统自动生成 0.1, 0.2 或 1, 2 这样整齐的刻度
+    max: smartMax, // 使用计算出的整齐最大值
+    // splitNumber 强制建议 ECharts 分成 5 段（通常会产生等间距）
+    splitNumber: 5, 
     splitLine: { 
         lineStyle: { type: 'dashed' } 
     },
     axisTick: { show: true },
     axisLine: { show: true },
     axisLabel: {
-        // 自动处理小数精度，防止 0.70000000001 这种情况
-        formatter: (value) => value.toFixed(value < 1 ? 2 : 1)
+        // 保证标签显示的简洁
+        formatter: function(value) {
+            if (value === 0) return '0';
+            // 如果最大值很小，保留两位小数，否则保留一位或取整
+            return smartMax < 1 ? value.toFixed(2) : value.toFixed(1);
+        }
     }
 },
         series: series
