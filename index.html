@@ -967,6 +967,10 @@ function renderInversionChart() {
     //const rawMax = Math.max(...allValues);
     //const interval = Math.ceil((rawMax || 10) / 5 / 2) * 2; 
     //const yMax = interval * 5;
+// --- 修改这里的逻辑 ---
+const rawMax = Math.max(...allValues);
+// 如果最大值很小（比如 0.7），我们给 15% 的余量；如果是 0，给个默认值 1
+const yMax = rawMax > 0 ? (rawMax * 1.15) : 1;
 
     // 6. 设置图表最终 Option
     chart.setOption({
@@ -1009,17 +1013,23 @@ function renderInversionChart() {
                 rotate: yearRange.length > 12 ? 45 : 0 // 年份过多自动旋转
             }
         },
-        yAxis: {
+       yAxis: {
     type: "value",
     name: "Gg yr⁻¹",
     min: 0,
-    // 自动计算最大值，并增加 10% 的留白空间
-    max: function (value) {
-        return (value.max * 1.1).toFixed(2); 
+    // 使用上面计算出的包含标准差的最大值
+    max: parseFloat(yMax.toFixed(2)), 
+    
+    // 移除手动设置的 interval，让系统自动生成 0.1, 0.2 或 1, 2 这样整齐的刻度
+    splitLine: { 
+        lineStyle: { type: 'dashed' } 
     },
-    splitLine: { lineStyle: { type: 'dashed' } },
     axisTick: { show: true },
-    axisLine: { show: true }
+    axisLine: { show: true },
+    axisLabel: {
+        // 自动处理小数精度，防止 0.70000000001 这种情况
+        formatter: (value) => value.toFixed(value < 1 ? 2 : 1)
+    }
 },
         series: series
     });
