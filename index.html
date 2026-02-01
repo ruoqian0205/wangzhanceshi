@@ -987,7 +987,7 @@ if (rawMax <= 0 || !isFinite(rawMax)) {
     // 寻找一个整齐的步长 (Step)
     // 根据数量级找到合适的刻度值 (如 0.1, 0.2, 0.5, 1, 2, 5, 10...)
     const magnitude = Math.pow(10, Math.floor(Math.log10(targetMax)));
-    const candidateSteps = [0.1, 0.2, 0.25, 0.5, 1, 2, 2.5, 5, 10].map(s => s * magnitude / 1);
+    const candidateSteps = [0.1, 0.2, 0.25, 0.3, 0.5, 1, 2, 2.5, 3, 5, 10].map(s => s * magnitude / 1);
     
     // 找到第一个能覆盖 targetMax / 5 的整齐刻度
     const idealStep = candidateSteps.find(s => s >= targetMax / 5) || candidateSteps[candidateSteps.length - 1];
@@ -1359,7 +1359,7 @@ if (rawMax <= 0 || !isFinite(rawMax)) {
     const targetMax = rawMax * 1.15;
     // 根据数量级找到合适的刻度值 (如 0.1, 0.2, 0.5, 1, 2, 5, 10...)
     const magnitude = Math.pow(10, Math.floor(Math.log10(targetMax)));
-    const candidateSteps = [0.1, 0.2, 0.25, 0.5, 1, 2, 2.5, 5, 10].map(s => s * magnitude / 1);
+    const candidateSteps = [0.1, 0.2, 0.25, 0.5, 1, 1.5, 2, 3, 2.5, 5, 10, 150].map(s => s * magnitude / 1);
     // 找到第一个能覆盖 targetMax / 5 的整齐刻度
     const idealStep = candidateSteps.find(s => s >= targetMax / 5) || candidateSteps[candidateSteps.length - 1];
     smartInterval = idealStep;
