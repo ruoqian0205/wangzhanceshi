@@ -118,42 +118,60 @@
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-6 gap-4 mb-8">
-            <div>
-                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Substance</label>
-                <select id="substance-select" onchange="handleMainFilterChange()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500">
-                    <option value="" disabled selected>-- Select Substance --</option><option>CFC-11</option><option>CFC-12</option><option>CFC-113</option><option>CTC</option><option>TCA</option><option>Halon-1211</option><option>Halon-1301</option><option>HCFC-22</option>
-                    <option>HCFC-141b</option><option>HCFC-142b</option><option>HFC-134a</option><option>HFC-143a</option><option>HFC-125</option><option>HFC-32</option><option>HFC-152a</option><option>HFC-245fa</option><option>HFC-227ea</option><option>HFC-236fa</option><option>HFC-365mfc</option><option>CH3Br</option><option>SF6</option><option>NF3</option><option>CF4</option><option>C2F6</option><option>C3F8</option><option>c-C4F8</option>
+    <div>
+        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Substance</label>
+        <select id="substance-select" onchange="handleMainFilterChange()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500">
+            <option value="" disabled selected>-- Select Substance --</option>
+            <option>CFC-11</option><option>CFC-12</option><option>CFC-113</option><option>CTC</option><option>TCA</option>
+            <option>Halon-1211</option><option>Halon-1301</option><option>HCFC-22</option><option>HCFC-141b</option>
+            <option>HCFC-142b</option><option>HFC-134a</option><option>HFC-143a</option><option>HFC-125</option>
+            <option>HFC-32</option><option>HFC-152a</option><option>HFC-245fa</option><option>HFC-227ea</option>
+            <option>HFC-236fa</option><option>HFC-365mfc</option><option>CH3Br</option><option>SF6</option>
+            <option>NF3</option><option>CF4</option><option>C2F6</option><option>C3F8</option><option>c-C4F8</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Region</label>
+        <select id="region-select" onchange="handleMainFilterChange()" class="w-full border rounded-lg p-2 text-sm">
+            <option value="" disabled selected>-- Select Region --</option>
+            <option>China</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Start Year</label>
+        <select id="start-year" class="w-full border rounded-lg p-2 text-sm">
+            <option>1980</option>
+        </select>
+    </div>
+
+    <div>
+        <label class="block text-xs font-bold text-gray-400 uppercase mb-1">End Year</label>
+        <select id="end-year" class="w-full border rounded-lg p-2 text-sm">
+            <option>2024</option>
+        </select>
+    </div>
+
+    <div class="md:col-span-2 flex items-end space-x-2">
+        
+        <button id="btn-line" onclick="setActiveButton('btn-line'); updateInventoryChart('line')" 
+                class="chart-btn w-24 bg-gray-200 text-gray-800 text-xs font-bold py-2.5 rounded hover:bg-gray-300 transition uppercase whitespace-nowrap">
+            Total (Line)
+        </button>
+
+        <div id="reference-wrapper" class="flex-1">
+            <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Source (for Sector)</label>
+            <select id="reference-select" class="w-full border rounded-lg p-2 text-sm">
                 </select>
-            </div>
-            <div>
-                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Region</label>
-                <select id="region-select" onchange="handleMainFilterChange()" class="w-full border rounded-lg p-2 text-sm">
-                    <option value="" disabled selected>-- Select Region --</option><option>China</option>
-                </select>
-            </div>
-            <div>
-                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Start Year</label>
-                <select id="start-year" class="w-full border rounded-lg p-2 text-sm"><option>1980</option></select>
-            </div>
-            <div>
-                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">End Year</label>
-                 <select id="end-year" class="w-full border rounded-lg p-2 text-sm"><option>2024</option></select>
-            </div>
-            <div id="reference-wrapper">
-                <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Source (for Sector)</label>
-                <select id="reference-select" class="w-full border rounded-lg p-2 text-sm"></select>
-            </div>
-            <div class="flex items-end space-x-2">
-   <button id="btn-line" onclick="setActiveButton('btn-line'); updateInventoryChart('line')" 
-            class="chart-btn flex-1 bg-gray-200 text-gray-800 text-xs font-bold py-2.5 rounded hover:bg-gray-300 transition uppercase">
-        Total (Line)
-    </button>
-    <button id="btn-bar" onclick="setActiveButton('btn-bar'); updateInventoryChart('bar')" 
-            class="chart-btn flex-1 bg-gray-200 text-gray-800 text-xs font-bold py-2.5 rounded hover:bg-gray-300 transition uppercase">
-        Sector (Bar)
-    </button>
-</div>
         </div>
+
+        <button id="btn-bar" onclick="setActiveButton('btn-bar'); updateInventoryChart('bar')" 
+                class="chart-btn w-24 bg-gray-200 text-gray-800 text-xs font-bold py-2.5 rounded hover:bg-gray-300 transition uppercase whitespace-nowrap">
+            Sector (Bar)
+        </button>
+    </div>
+</div>
 
         <div id="inventory-chart" class="w-full h-[500px]" style="width: 100%; height: 500px;"></div>
     </div>
@@ -666,16 +684,25 @@ function handleMainFilterChange() {
 function syncReferenceDropdown(substance, region) {
     const refSelect = document.getElementById('reference-select');
     
-    // 过滤出当前物质和地区下的所有研究来源
-    const sources = [...new Set(inventoryData
-        .filter(d => d.substance === substance && d.region === region)
-        .map(d => d.ref_short))];
+// 先过滤出当前物质和地区的所有基础数据
+    const filteredData = inventoryData.filter(d => 
+        d.substance === substance && d.region === region
+    );
+
+    // 找出那些拥有“非 total”行业数据的研究来源名称
+    const sourcesWithSectors = [...new Set(filteredData
+        .filter(d => d.sector.toLowerCase() !== "total") // 核心修改：只保留行业数据行
+        .map(d => d.ref_short)
+    )];
 
     // 填充下拉框
-    if (sources.length > 0) {
-        refSelect.innerHTML = sources.map(s => `<option value="${s}">${s}</option>`).join('');
+    if (sourcesWithSectors.length > 0) {
+        refSelect.innerHTML = sourcesWithSectors.map(s => 
+            `<option value="${s}">${s}</option>`
+        ).join('');
     } else {
-        refSelect.innerHTML = '<option value="">No Sources</option>';
+        // 如果该物质下没有任何分行业数据，显示提示
+        refSelect.innerHTML = '<option value="">Only Total Available</option>';
     }
 }
 
