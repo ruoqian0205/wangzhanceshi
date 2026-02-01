@@ -967,22 +967,29 @@ function renderInversionChart() {
     //const rawMax = Math.max(...allValues);
     //const interval = Math.ceil((rawMax || 10) / 5 / 2) * 2; 
     //const yMax = interval * 5;
-// 1. 找到包含标准差的最大原始值
+// 1. 拿到包含标准差的最大值
 const rawMax = Math.max(...allValues);
 
-// 2. 自动计算一个“漂亮”的最大值和间距
-// 逻辑：取 rawMax 的 1.1 倍，并向上取整到最接近的有效位数
-let smartMax;
-if (rawMax <= 0) {
+// 2. 计算理想的最大值和等分间距
+let smartMax, smartInterval;
+
+if (rawMax <= 0 || !isFinite(rawMax)) {
     smartMax = 1;
+    smartInterval = 0.2;
 } else {
-    // 找到数量级（如 0.1, 1, 10, 100）
-    const magnitude = Math.pow(10, Math.floor(Math.log10(rawMax)));
-    // 具体的步长：将最大值分为 5 份，并根据数量级向上取整
-    const approxStep = (rawMax * 1.1) / 5;
-    // 让步长变成 0.1, 0.2, 0.5, 1, 2, 5 这种整齐的数字
-    const step = Math.ceil(approxStep / (magnitude / 10)) * (magnitude / 10);
-    smartMax = step * 5; // 强制分为 5 个等间距
+    // 稍微给 15% 的余量
+    const targetMax = rawMax * 1.15;
+    
+    // 寻找一个整齐的步长 (Step)
+    // 根据数量级找到合适的刻度值 (如 0.1, 0.2, 0.5, 1, 2, 5, 10...)
+    const magnitude = Math.pow(10, Math.floor(Math.log10(targetMax)));
+    const candidateSteps = [0.1, 0.2, 0.25, 0.5, 1, 2, 2.5, 5, 10].map(s => s * magnitude / 1);
+    
+    // 找到第一个能覆盖 targetMax / 5 的整齐刻度
+    const idealStep = candidateSteps.find(s => s >= targetMax / 5) || candidateSteps[candidateSteps.length - 1];
+    
+    smartInterval = idealStep;
+    smartMax = idealStep * 5; // 强制 5 等分
 }
 
     // 6. 设置图表最终 Option
@@ -1030,22 +1037,23 @@ if (rawMax <= 0) {
     type: "value",
     name: "Gg yr⁻¹",
     min: 0,
-    max: smartMax, // 使用计算出的整齐最大值
-    // splitNumber 强制建议 ECharts 分成 5 段（通常会产生等间距）
-    splitNumber: 5, 
+    max: smartMax, 
+    interval: smartInterval, // 关键修改：强制每一个刻度的间距完全一致
     splitLine: { 
         lineStyle: { type: 'dashed' } 
     },
     axisTick: { show: true },
     axisLine: { show: true },
     axisLabel: {
-        // 保证标签显示的简洁
-        formatter: function(value) {
-            if (value === 0) return '0';
-            // 如果最大值很小，保留两位小数，否则保留一位或取整
-            return smartMax < 1 ? value.toFixed(2) : value.toFixed(1);
+    formatter: function(value) {
+        // 如果数值本身就是整数，直接返回整数形式
+        if (Number.isInteger(value)) {
+            return value.toString();
         }
+        // 否则根据间距动态决定小数位数
+        return smartInterval < 0.1 ? value.toFixed(2) : value.toFixed(1);
     }
+}
 },
         series: series
     });
