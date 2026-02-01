@@ -1144,7 +1144,13 @@ function handleCompSubstanceChange() {
     const availableRegions = [...new Set(comparisonData
         .filter(d => d.substance === selectedSubstance)
         .map(d => d.region)
-    )].sort(); // 排序以便更好查找
+    )]; 
+
+availableRegions.sort((a, b) => {
+        if (a === 'Global') return -1; // 如果 a 是 Global，排在前面
+        if (b === 'Global') return 1;  // 如果 b 是 Global，排在后面
+        return a.localeCompare(b);    // 其他情况按字母升序排列
+    });
 
     // 3. 更新地区下拉框的内容
     let optionsHtml = '<option value="" disabled selected>-- Select Region --</option>';
