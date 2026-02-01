@@ -1010,20 +1010,17 @@ function renderInversionChart() {
             }
         },
         yAxis: {
-            type: "value",
-            name: "Gg yr⁻¹",
-            min: 0,
-            scale: true, // 根据数据范围自动缩放
-            splitLine: { lineStyle: { type: 'dashed' } },
-            axisTick: { show: true },
-            axisLine: { show: true },
-            axisLabel: {
-                formatter: function (value) {
-                    // 处理过小的数值显示
-                    return value >= 1 ? value : value.toFixed(3);
-                }
-            }
-        },
+    type: "value",
+    name: "Gg yr⁻¹",
+    min: 0,
+    // 自动计算最大值，并增加 10% 的留白空间
+    max: function (value) {
+        return (value.max * 1.1).toFixed(2); 
+    },
+    splitLine: { lineStyle: { type: 'dashed' } },
+    axisTick: { show: true },
+    axisLine: { show: true }
+},
         series: series
     });
 }
