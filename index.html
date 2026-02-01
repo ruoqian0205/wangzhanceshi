@@ -121,7 +121,7 @@
             <div>
                 <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Substance</label>
                 <select id="substance-select" onchange="handleMainFilterChange()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500">
-                    <option value="" disabled selected>-- Select Substance --</option><option>CFC-11</option><option>CFC-12</option><option>CFC-113</option><option>CTC</option><option>TCA</option><option>MB</option><option>Halon-1211</option><option>Halon-1301</option><option>HCFC-22</option>
+                    <option value="" disabled selected>-- Select Substance --</option><option>CFC-11</option><option>CFC-12</option><option>CFC-113</option><option>CTC</option><option>TCA</option><option>Halon-1211</option><option>Halon-1301</option><option>HCFC-22</option>
                     <option>HCFC-141b</option><option>HCFC-142b</option><option>HFC-134a</option><option>HFC-143a</option><option>HFC-125</option><option>HFC-32</option><option>HFC-152a</option><option>HFC-245fa</option><option>HFC-227ea</option><option>HFC-236fa</option><option>HFC-365mfc</option><option>CH3Br</option><option>SF6</option><option>NF3</option><option>CF4</option><option>C2F6</option><option>C3F8</option><option>c-C4F8</option>
                 </select>
             </div>
@@ -964,9 +964,9 @@ function renderInversionChart() {
     });
 
     // 计算 Y 轴动态范围
-    const rawMax = Math.max(...allValues);
-    const interval = Math.ceil((rawMax || 10) / 5 / 2) * 2; 
-    const yMax = interval * 5;
+    //const rawMax = Math.max(...allValues);
+    //const interval = Math.ceil((rawMax || 10) / 5 / 2) * 2; 
+    //const yMax = interval * 5;
 
     // 6. 设置图表最终 Option
     chart.setOption({
@@ -1013,11 +1013,16 @@ function renderInversionChart() {
             type: "value",
             name: "Gg yr⁻¹",
             min: 0,
-            max: yMax,
-            interval: interval,
+            scale: true, // 根据数据范围自动缩放
             splitLine: { lineStyle: { type: 'dashed' } },
             axisTick: { show: true },
-            axisLine: { show: true }
+            axisLine: { show: true },
+            axisLabel: {
+                formatter: function (value) {
+                    // 处理过小的数值显示
+                    return value >= 1 ? value : value.toFixed(3);
+                }
+            }
         },
         series: series
     });
