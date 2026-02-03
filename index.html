@@ -569,9 +569,6 @@ function updateYearSelects(data, startSelectId, endSelectId) {
         initInversionSelect();
         initComparisonSelect();
 
-        // Load Data
-        const success = await loadData();
-
         // If success, render charts
         if (success) {
             updateInventoryChart("line");
@@ -1547,20 +1544,11 @@ function updateComparisonReferenceTable(data) {
         alert("Login Successful (Demo Mode)");
     }
 
-    function handleDownload(filename) {
-        if (!isLoggedIn) {
-            alert("Please login to download data.");
-            openAuthModal();
-            return;
-        }
-        // Direct download from GitHub Pages (static file)
-        const link = document.createElement("a");
-        link.href = filename; // Points to the file in the same folder
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
+   function handleDownload(filename) {
+    // 弹出提示框，要求联系指定邮箱
+    alert("Please contact us at fangxuekun@zju.edu.cn to obtain the data.");
+}
+
     </script>
 </body>
 </html>
