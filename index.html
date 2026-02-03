@@ -569,6 +569,9 @@ function updateYearSelects(data, startSelectId, endSelectId) {
         initInversionSelect();
         initComparisonSelect();
 
+// Load Data
+        const success = await loadData();
+
         // If success, render charts
         if (success) {
             updateInventoryChart("line");
