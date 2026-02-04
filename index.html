@@ -1302,24 +1302,38 @@ function renderComparisonChart() {
         return;
     }
 
-    // 6. 构造 Series（用于 ECharts）
+// 6. 构造 Series（用于 ECharts）
     const datasets = [...new Set(filtered.map(d => d.dataset || d.study || d.Name))];
     let series = [];
     let allValuesForScale = [0];
+    
+    // --- 新增：初始化分类图例数组 ---
+    const buLegends = [];
+    const tdLegends = [];
 
     datasets.forEach(name => {
         const rows = filtered.filter(d => (d.dataset || d.study || d.Name) === name);
         const lineData = [];
         const errorData = [];
-        const method = rows[0]?.method || rows[0]?.Method || "Unknown";
+        const method = (rows[0]?.method || rows[0]?.Method || "Unknown").toLowerCase();
+
+        // --- 新增：根据 method 归类图例 ---
+        if (method.includes('bottom-up')) {
+            buLegends.push(name);
+        } else if (method.includes('inverse') || method.includes('isc')) {
+            tdLegends.push(name);
+        } else {
+            // 如果都不匹配，可以默认放进一个组，或者加个 Other
+            tdLegends.push(name); 
+        }
 
         yearRange.forEach((y, idx) => {
+            // ... (保持你原有的 lineData 和 errorData 处理逻辑不变) ...
             const r = rows.find(d => parseInt(d.year || d.Year) === y);
             if (!r) {
                 lineData.push(null);
                 return;
             }
-
             const val = r.value ?? r.mean ?? r.Mean;
             const errPos = parseFloat(r.err_pos || r.ErrPos || 0);
             const errNeg = parseFloat(r.err_neg || r.ErrNeg || 0);
@@ -1327,7 +1341,6 @@ function renderComparisonChart() {
             if (val !== undefined && val !== null) {
                 lineData.push({ value: val, errPos: errPos, errNeg: errNeg });
                 allValuesForScale.push(val);
-
                 if (errPos > 0 || errNeg > 0) {
                     const upper = val + errPos;
                     const lower = val - errNeg;
@@ -1344,7 +1357,7 @@ function renderComparisonChart() {
             type: "line",
             data: lineData,
             connectNulls: false,
-            symbol: method.toLowerCase().includes("bottom-up") ? "circle" : "emptyTriangle",
+            symbol: method.includes("bottom-up") ? "circle" : "emptyTriangle",
             symbolSize: 8,
             z: 20
         });
@@ -1354,6 +1367,7 @@ function renderComparisonChart() {
                 type: "custom",
                 name: name,
                 renderItem: function (params, api) {
+                    // ... (保持你原有的 error bar 绘制逻辑不变) ...
                     const xIndex = api.value(0);
                     const low = api.coord([xIndex, api.value(1)]);
                     const high = api.coord([xIndex, api.value(2)]);
@@ -1392,7 +1406,7 @@ if (rawMax <= 0 || !isFinite(rawMax)) {
     const targetMax = rawMax * 1.15;
     // 根据数量级找到合适的刻度值 (如 0.1, 0.2, 0.5, 1, 2, 5, 10...)
     const magnitude = Math.pow(10, Math.floor(Math.log10(targetMax)));
-    const candidateSteps = [0.1, 0.2, 0.25, 0.5, 1, 1.5, 2, 3, 2.5, 5, 10, 150].map(s => s * magnitude / 1);
+    const candidateSteps = [0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.5, 1.6, 2, 3, 2.5, 5, 10, 150].map(s => s * magnitude / 1);
     // 找到第一个能覆盖 targetMax / 5 的整齐刻度
     const idealStep = candidateSteps.find(s => s >= targetMax / 5) || candidateSteps[candidateSteps.length - 1];
     smartInterval = idealStep;
@@ -1400,58 +1414,141 @@ if (rawMax <= 0 || !isFinite(rawMax)) {
 }
 
     // 8. 设置图表配置
-    chart.setOption({
-        color: myExtendedColors,
-        title: { text: `${substance} Emission Comparison (${region})`, left: "center", top: 10 },
-        tooltip: {
-            trigger: "axis",
-            formatter: function(params) {
-                let res = `<b>Year: ${params[0].name}</b><br/>`;
-                let hasValid = false;
-                params.forEach(p => {
-                    if (p.seriesType === 'line' && p.data && p.data.value !== null) {
-                        const d = p.data;
-                        const errInfo = (d.errPos || d.errNeg) 
-                            ? `<span style="font-size:0.9em; color:#666;"> (+${d.errPos}/-${d.errNeg})</span>` 
-                            : "";
-                        res += `${p.marker} ${p.seriesName}: <b>${d.value}</b>${errInfo}<br/>`;
-                        hasValid = true;
-                    }
-                });
-                return hasValid ? res : null;
-            }
-        },
-        legend: { bottom: 5, data: datasets },
-        grid: { left: '5%', right: '5%', bottom: '15%', containLabel: true },
-        xAxis: {
-            type: "category",
-            data: yearRange,
-            axisLabel: { interval: 0, rotate: yearRange.length > 10 ? 45 : 0 }
-        },
-        yAxis: {
-    type: "value",
-    name: "Gg yr⁻¹",
-    min: 0,
-    max: smartMax, 
-    interval: smartInterval, // 关键修改：强制每一个刻度的间距完全一致
-    splitLine: { 
-        lineStyle: { type: 'dashed' } 
-    },
-    axisTick: { show: true },
-    axisLine: { show: true },
-    axisLabel: {
-    formatter: function(value) {
-        // 如果数值本身就是整数，直接返回整数形式
-        if (Number.isInteger(value)) {
-            return value.toString();
-        }
-        // 否则根据间距动态决定小数位数
-        return smartInterval < 0.1 ? value.toFixed(2) : value.toFixed(1);
-    }
-}
-},
-        series: series
+// --- 1. 动态布局参数准备 ---
+const leftPos = '10%'; 
+const titleArray = [{ text: `${substance} Emission Comparison (${region})`, left: "center", top: 10 }];
+const legendArray = [];
+
+// --- 2. 动态计算行数并优化布局 ---
+const containerWidth = chartDom.clientWidth || 1000; // 获取容器宽度
+const charWidth = 10; // 预估每个字符宽度
+const itemPadding = 60; // 图例图标+间距的固定宽度
+const itemsPerRow = Math.floor(containerWidth / 150); // 粗略预估一行放几个，150px为一个图例单元
+
+// 计算 BU 占了几行
+const buRows = Math.ceil(buLegends.length / itemsPerRow);
+// 计算 TD 占了几行
+const tdRows = Math.ceil(tdLegends.length / itemsPerRow);
+
+// 动态高度单位 (每行大约占 4%-5%)
+const rowHeight = 4.5; 
+const titleGap = 6; // 标题与图例之间的间距
+
+let gridBottomPercent = 25;
+
+if (tdLegends.length > 0 && buLegends.length > 0) {
+    // 1. Top-down 居于最底部
+    const tdLegendBottom = 2; 
+    const tdTitleBottom = tdLegendBottom + (tdRows * rowHeight);
+
+    legendArray.push({
+        data: tdLegends,
+        bottom: tdLegendBottom + '%',
+        left: leftPos,
+        width: '85%',
+        itemGap: 15
     });
+    titleArray.push({
+        text: 'Top-down:',
+        left: leftPos,
+        bottom: tdTitleBottom + '%',
+        textStyle: { fontSize: 13, color: '#1e3a8a', fontWeight: 'bold' }
+    });
+
+    // 2. Bottom-up 根据 TD 的高度动态向上漂移
+    // 这里的 4% 是 TD标题 与 BU图例 之间的额外空隙，你可以根据需要调小
+    const buLegendBottom = tdTitleBottom + 4; 
+    const buTitleBottom = buLegendBottom + (buRows * rowHeight);
+
+    legendArray.push({
+        data: buLegends,
+        bottom: buLegendBottom + '%',
+        left: leftPos,
+        width: '85%',
+        itemGap: 15
+    });
+    titleArray.push({
+        text: 'Bottom-up:',
+        left: leftPos,
+        bottom: buTitleBottom + '%',
+        textStyle: { fontSize: 13, color: '#1e3a8a', fontWeight: 'bold' }
+    });
+
+    // 3. 动态调整网格底部，确保不压到最上方的 BU 标题
+    gridBottomPercent = buTitleBottom + 8;
+} else {
+    // 只有一组数据时的逻辑保持紧凑
+    gridBottomPercent = 20;
+    const activeLegends = buLegends.length > 0 ? buLegends : tdLegends;
+    const activeLabel = buLegends.length > 0 ? 'Bottom-up:' : 'Top-down:';
+    
+    legendArray.push({
+        data: activeLegends,
+        bottom: '2%',
+        left: leftPos,
+        width: '85%'
+    });
+    titleArray.push({
+        text: activeLabel,
+        left: leftPos,
+        bottom: '10%', // 只有一行时调低标题位置
+        textStyle: { fontSize: 13, color: '#1e3a8a', fontWeight: 'bold' }
+    });
+}
+
+// --- 3. 设置图表配置 ---
+chart.setOption({
+    color: myExtendedColors,
+    title: titleArray,
+    legend: legendArray,
+    // 动态调整 grid.bottom，防止图表压到图例
+    grid: { 
+        left: '5%', 
+        right: '5%', 
+        top: 80,
+        bottom: gridBottomPercent + '%', 
+        containLabel: true 
+    },
+    tooltip: {
+        trigger: "axis",
+        formatter: function(params) {
+            let res = `<b>Year: ${params[0].name}</b><br/>`;
+            let hasValid = false;
+            params.forEach(p => {
+                if (p.seriesType === 'line' && p.data && p.data.value !== null) {
+                    const d = p.data;
+                    const errInfo = (d.errPos || d.errNeg) 
+                        ? `<span style="font-size:0.9em; color:#666;"> (+${d.errPos}/-${d.errNeg})</span>` 
+                        : "";
+                    res += `${p.marker} ${p.seriesName}: <b>${d.value}</b>${errInfo}<br/>`;
+                    hasValid = true;
+                }
+            });
+            return hasValid ? res : null;
+        }
+    },
+    xAxis: {
+        type: "category",
+        data: yearRange,
+        axisLabel: { interval: 0, rotate: yearRange.length > 10 ? 45 : 0 }
+    },
+    yAxis: {
+        type: "value",
+        name: "Gg yr⁻¹",
+        min: 0,
+        max: smartMax, 
+        interval: smartInterval,
+        splitLine: { lineStyle: { type: 'dashed' } },
+        axisTick: { show: true },
+        axisLine: { show: true },
+        axisLabel: {
+            formatter: function(value) {
+                return Number.isInteger(value) ? value.toString() : value.toFixed(1);
+            }
+        }
+    },
+    series: series
+});
 }
 
 /**
