@@ -1201,44 +1201,45 @@ function updateReferenceTable(data) {
 }
 
 // 7. Chart Logic - Comparison (支持非对称误差棒)
-
-// 当比较页面的物质选择改变时，更新地区下拉框
 function handleCompSubstanceChange() {
     const selectedSubstance = document.getElementById('comp-substance').value;
     const regionSelect = document.getElementById('comp-region');
     
-    // 1. 如果没有选择物质，重置地区下拉框
-    if (!selectedSubstance) {
-        regionSelect.innerHTML = '<option value="" disabled selected>-- Select Region --</option>';
-        return;
-    }
+    // 注意：这里纠正了你原代码中的变量名错误 (subVal 改为 selectedSubstance)
+    if (!selectedSubstance || !comparisonData) return;
 
-    // 2. 从 comparisonData 中过滤出该物质对应的所有唯一地区
-    // 注意：确保 CSV 中的列名是 'substance' 和 'region'
+    // 1. 从 comparisonData 中过滤出该物质对应的所有唯一地区
     const availableRegions = [...new Set(comparisonData
         .filter(d => d.substance === selectedSubstance)
         .map(d => d.region)
-    )]; 
+    )].filter(r => r); // 过滤掉空值
 
-availableRegions.sort((a, b) => {
-        if (a === 'Global') return -1; // 如果 a 是 Global，排在前面
-        if (b === 'Global') return 1;  // 如果 b 是 Global，排在后面
-        return a.localeCompare(b);    // 其他情况按字母升序排列
+    // 排序逻辑：Global优先，其他字母序
+    availableRegions.sort((a, b) => {
+        if (a === 'Global') return -1;
+        if (b === 'Global') return 1;
+        return a.localeCompare(b);
     });
 
-    // 3. 更新地区下拉框的内容
-    let optionsHtml = '<option value="" disabled selected>-- Select Region --</option>';
+    // 2. 更新地区下拉框的内容
+    let optionsHtml = ''; // 移除 "-- Select Region --"
+    
     if (availableRegions.length > 0) {
         availableRegions.forEach(reg => {
             optionsHtml += `<option value="${reg}">${reg}</option>`;
         });
     } else {
-        optionsHtml += '<option value="">No regions available</option>';
+        optionsHtml = '<option value="">No regions available</option>';
     }
     
     regionSelect.innerHTML = optionsHtml;
 
-updateComparisonYearRange();
+    // 3. 【关键修改】默认选中第一个地区，并立即触发年份联动
+    if (availableRegions.length > 0) {
+        regionSelect.selectedIndex = 0; 
+        // 只有在初始加载或需要联动更新年份时才调用
+        updateComparisonYearRange();
+    }
 }
 
 function updateComparisonYearRange() {
