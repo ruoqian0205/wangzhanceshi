@@ -791,13 +791,13 @@ function updateInventoryChart(type) {
                 params.forEach(item => {
                     // 只有当数据值不是 null、undefined 且不是 '-' 时才显示
                     if (item.value !== null && item.value !== undefined && item.value !== '-') {
-                        res += `${item.marker} ${item.seriesName}: <b>${item.value}</b> Gg yr⁻¹<br/>`;
+                        res += `${item.marker} ${item.seriesName}: <b>${item.value}</b><br/>`;
                         hasData = true;
                     }
                 });
 
                 // 如果这一年所有研究都没有数据，返回空或提示
-                return hasData ? res : `<b>Year: ${params[0].name}</b><br/>No Data`;
+                return hasData ? res : `<b>Year: ${params[0].name}</b><br/>`;
             }
         },
         // ================================================================
