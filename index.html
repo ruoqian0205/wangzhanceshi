@@ -121,12 +121,11 @@
     <div>
         <label class="block text-xs font-bold text-gray-400 uppercase mb-1">Substance</label>
         <select id="substance-select" onchange="handleMainFilterChange()" class="w-full border rounded-lg p-2 text-sm focus:ring-2 focus:ring-blue-500">
-            <option>CFC-11</option><option>CFC-12</option><option>CFC-113</option><option>CTC</option><option>TCA</option>
-            <option>Halon-1211</option><option>Halon-1301</option><option>HCFC-22</option><option>HCFC-141b</option>
-            <option>HCFC-142b</option><option>HFC-134a</option><option>HFC-143a</option><option>HFC-125</option>
-            <option>HFC-32</option><option>HFC-152a</option><option>HFC-245fa</option><option>HFC-227ea</option>
-            <option>HFC-236fa</option><option>HFC-365mfc</option><option>CH3Br</option><option>SF6</option>
-            <option>NF3</option><option>CF4</option><option>C2F6</option><option>C3F8</option><option>c-C4F8</option>
+            <option>CFC-11</option><option>CFC-12</option><option>CFC-113</option><option>HCFC-22</option><option>HCFC-141b</option>
+            <option>HCFC-142b</option><option>HFC-134a</option><option>HFC-143a</option><option>HFC-32</option>
+            <option>HFC-125</option><option>HFC-152a</option><option>HFC-227ea</option><option>HFC-236fa</option><option>HFC-245fa</option><option>HFC-365mfc</option><option>SF6</option>
+            <option>NF3</option><option>CF4</option><option>C2F6</option><option>C3F8</option><option>c-C4F8</option><option>CCl4</option><option>CH3Br</option><option>CH3CCl3</option>
+            <option>Halon-1211</option><option>Halon-1301</option>
         </select>
     </div>
 
@@ -221,7 +220,7 @@
                    <option>CFC-11</option><option>CFC-12</option>
                     <option>HCFC-22</option><option>HCFC-141b</option><option>HCFC-142b</option><option>HCFC-124</option>
                     <option>HFC-134a</option><option>HFC-143a</option><option>HFC-32</option>
-                    <option>HFC-125</option><option>HFC-152a</option><option>HFC-23</option><option>HFC-227ea</option><option>HFC-236fa</option><option>HFC-245fa</option><option>HFC-365mfc</option><option>SF6</option><option>CH3Br</option><option>CH3CCl3</option><option>CCl4</option>
+                    <option>HFC-125</option><option>HFC-152a</option><option>HFC-23</option><option>HFC-227ea</option><option>HFC-236fa</option><option>HFC-245fa</option><option>HFC-365mfc</option><option>SF6</option><option>CCl4</option><option>CH3Br</option><option>CH3CCl3</option>
                 </select>
             </div>
 
@@ -777,10 +776,31 @@ function updateInventoryChart(type) {
         d.substance === substance && d.region === region && d.year >= sYear && d.year <= eYear
     );
 
-    let option = {
+   let option = {
         color: myExtendedColors,
         title: { left: "center", top: 0, textStyle: { fontSize: 16 } },
-        tooltip: { trigger: "axis", confine: true },
+        // ================== 核心修改部分：自定义 Tooltip ==================
+        tooltip: { 
+            trigger: "axis", 
+            confine: true,
+            formatter: function (params) {
+                // params 是当前横坐标下所有系列的数据点数组
+                let res = `<b>Year: ${params[0].name}</b><br/>`;
+                let hasData = false;
+
+                params.forEach(item => {
+                    // 只有当数据值不是 null、undefined 且不是 '-' 时才显示
+                    if (item.value !== null && item.value !== undefined && item.value !== '-') {
+                        res += `${item.marker} ${item.seriesName}: <b>${item.value}</b> Gg yr⁻¹<br/>`;
+                        hasData = true;
+                    }
+                });
+
+                // 如果这一年所有研究都没有数据，返回空或提示
+                return hasData ? res : `<b>Year: ${params[0].name}</b><br/>No Data`;
+            }
+        },
+        // ================================================================
         legend: { bottom: 0, padding: [5, 10] },
         xAxis: { type: "category", data: yearRange },
         yAxis: { type: "value", name: "Gg yr⁻¹" },
@@ -796,24 +816,22 @@ function updateInventoryChart(type) {
             smooth: true,
             symbol: 'circle',
             symbolSize: 6,
+            connectNulls: false, // 确保无数据时不连线
             data: yearRange.map(y => {
                 const row = baseFiltered.find(d => d.year === y && d.ref_short === short && d.sector.toLowerCase() === "total");
-                return row ? row.value : null;
+                // 确保没有数据时返回 null 而不是 0，这样 formatter 才能过滤掉
+                return row ? row.value : null; 
             })
         }));
     } else {
-        // Bar Chart Logic
+        // ... (Bar Chart 部分保持不变，因为它已经有了 selectedRefShort 过滤，通常不会有空行)
+        // 但为了统一，Bar Chart 也会应用上面定义的自定义 tooltip
         if (!selectedRefShort) {
-            // 如果没有选中的来源，给一个提示或不做处理
-             chart.setOption({
-                title: { text: "Please select a substance with valid sources", left: "center" }
-            });
+            chart.setOption({ title: { text: "Please select a substance with valid sources", left: "center" } });
             return;
         }
-        
         const refData = baseFiltered.filter(d => d.ref_short === selectedRefShort && d.sector.toLowerCase() !== "total");
         const sectors = [...new Set(refData.map(d => d.sector))];
-        
         option.title.text = `${substance} Sectors (${selectedRefShort}) - ${region}`;
         option.series = sectors.map(sec => ({
             name: sec,
