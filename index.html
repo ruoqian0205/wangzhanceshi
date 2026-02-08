@@ -559,24 +559,22 @@ window.addEventListener("load", async () => {
         updateInventoryChart("line"); // 执行画图 [cite: 82]
 
         // --- 2. 反演页面 (Inversion) 默认设置 ---
-        const invSub = document.getElementById('inv-substance');
-        const invReg = document.getElementById('inv-country');
-        if (invSub.options.length > 1) invSub.selectedIndex = 1; 
-        if (invReg.options.length > 1) invReg.selectedIndex = 1;
-        
-        handleInvFilterChange(); // 触发更新该物质对应的年份范围
-        renderInversionChart(); // 执行画图 [cite: 236]
+       const invSub = document.getElementById('inv-substance');
+        if (invSub.options.length > 0) {
+            invSub.selectedIndex = 0; // 选中第一个物质
+            handleInvSubstanceChange(); // 执行联动：筛选地区 -> 更新年份 -> 画图
+        }
 
         // --- 3. 对比页面 (Comparison) 默认设置 ---
-        const compSub = document.getElementById('comp-substance');
-        if (compSub.options.length > 1) compSub.selectedIndex = 1;
-        
-        handleCompSubstanceChange(); // 必须先执行此函数以填充地区下拉框 
-        const compReg = document.getElementById('comp-region');
-        if (compReg.options.length > 0) compReg.selectedIndex = 0; // 选中填充后的第一个地区
-        
-        updateComparisonYearRange(); // 更新年份范围 [cite: 248]
-        renderComparisonChart(); // 执行画图 [cite: 251]
+       const compSub = document.getElementById('comp-substance');
+        if (compSub.options.length > 0) {
+            compSub.selectedIndex = 0;
+            handleCompSubstanceChange(); // 选中物质并填充地区
+            const compReg = document.getElementById('comp-region');
+            if (compReg.options.length > 0) compReg.selectedIndex = 0;
+            updateComparisonYearRange();
+            renderComparisonChart();
+        }
     }
     
     // 默认显示首页
@@ -834,19 +832,19 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
     // 6. Chart Logic - Inversion
-// 新增：处理反演界面物质变化时的地区联动
+// 新增/修改：处理反演界面物质变化时的地区联动
 function handleInvSubstanceChange() {
     const subVal = document.getElementById('inv-substance').value;
     const regSel = document.getElementById('inv-country');
     
-    if (!subVal) return;
+    if (!subVal || !inversionData || inversionData.length === 0) return;
 
-    // 1. 从数据中提取该物质对应的所有唯一地区
+    // 1. 从数据中提取该物质对应的所有唯一地区 (注意区分大小写)
     const availableRegions = [...new Set(
         inversionData
-            .filter(d => d.substance === subVal)
-            .map(d => d.region)
-    )].sort(); // 排序以便于查找
+            .filter(d => (d.substance === subVal || d.Substance === subVal))
+            .map(d => d.region || d.Region || d.country)
+    )].filter(r => r).sort(); // 过滤掉空值并排序
 
     // 2. 更新地区下拉框内容
     regSel.innerHTML = ''; // 清空旧选项
@@ -864,20 +862,23 @@ function handleInvSubstanceChange() {
     handleInvFilterChange();
 }
 
+// 修改：确保年份和图表同步更新
 function handleInvFilterChange() {
     const sub = document.getElementById('inv-substance').value;
     const reg = document.getElementById('inv-country').value;
     
-    // 只有当两个都选了才开始处理
     if (sub && reg) {
-        // 1. 从反演数据源筛选符合当前物质和地区的数据
+        // 1. 筛选数据以更新年份选择器
         const filtered = inversionData.filter(d => 
             (d.substance === sub || d.Substance === sub) && 
-            (d.country === reg || d.Region === reg || d.region === reg)
+            (d.region === reg || d.Region === reg || d.country === reg)
         );
         
         // 2. 自动更新该页面的年份选择器
         updateYearSelects(filtered, 'inv-start-year', 'inv-end-year');
+
+        // 3. 触发绘图
+        renderInversionChart();
     }
 }
 
