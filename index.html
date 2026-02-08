@@ -560,11 +560,27 @@ window.addEventListener("load", async () => {
 
         // --- 2. 反演页面 (Inversion) 默认设置 ---
        const invSub = document.getElementById('inv-substance');
-        if (invSub.options.length > 0) {
-            invSub.selectedIndex = 0; 
-            handleInvSubstanceChange(); // 执行联动：筛选地区并更新年份
-            renderInversionChart(); // 【初始显示】手动调用画图
-        }
+       const invReg = document.getElementById('inv-country');
+
+// 步骤 1: 确保物质下拉框有数据并选中第一个有效物质（通常索引 1 是第一个物质）
+if (invSub.options.length > 1) {
+    invSub.selectedIndex = 1; 
+    
+    // 步骤 2: 必须先触发物质变化联动，以填充对应的“地区”选项
+    // 确保您有一个 handleInvSubstanceChange 函数来根据物质更新地区下拉框
+    handleInvSubstanceChange(); 
+
+    // 步骤 3: 地区联动后，自动选中出现的第一个地区
+    if (invReg.options.length > 0) {
+        invReg.selectedIndex = 0; // 选中新填充列表的第一个地区
+    }
+
+    // 步骤 4: 触发年份范围更新
+    handleInvFilterChange(); 
+
+    // 步骤 5: 最后执行画图
+    renderInversionChart(); 
+}
 
         // --- 3. 对比页面 (Comparison) 默认设置 ---
        const compSub = document.getElementById('comp-substance');
