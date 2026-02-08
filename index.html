@@ -549,8 +549,8 @@ window.addEventListener("load", async () => {
         const subSel = document.getElementById('substance-select');
         const regSel = document.getElementById('region-select');
         // 索引 1 通常是第一个物质（索引 0 是 placeholder）
-        if (subSel.options.length > 1) subSel.selectedIndex = 1; 
-        if (regSel.options.length > 1) regSel.selectedIndex = 1; 
+        if (subSel.options.length > 0) subSel.selectedIndex = 0; 
+        if (regSel.options.length > 0) regSel.selectedIndex = 0; 
         
         handleMainFilterChange(); // 触发更新年份范围和来源下拉框 [cite: 71]
         setActiveButton('btn-line'); // 设置“Total (Line)”按钮为激活状态 
@@ -561,8 +561,8 @@ window.addEventListener("load", async () => {
        const invReg = document.getElementById('inv-country');
 
 // 步骤 1: 确保物质下拉框有数据并选中第一个有效物质（通常索引 1 是第一个物质）
-if (invSub.options.length > 1) {
-    invSub.selectedIndex = 1; 
+if (invSub.options.length > 0) {
+    invSub.selectedIndex = 0; 
     
     // 步骤 2: 必须先触发物质变化联动，以填充对应的“地区”选项
     // 确保您有一个 handleInvSubstanceChange 函数来根据物质更新地区下拉框
