@@ -561,8 +561,9 @@ window.addEventListener("load", async () => {
         // --- 2. 反演页面 (Inversion) 默认设置 ---
        const invSub = document.getElementById('inv-substance');
         if (invSub.options.length > 0) {
-            invSub.selectedIndex = 0; // 选中第一个物质
-            handleInvSubstanceChange(); // 执行联动：筛选地区 -> 更新年份 -> 画图
+            invSub.selectedIndex = 0; 
+            handleInvSubstanceChange(); // 执行联动：筛选地区并更新年份
+            renderInversionChart(); // 【初始显示】手动调用画图
         }
 
         // --- 3. 对比页面 (Comparison) 默认设置 ---
@@ -832,53 +833,43 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
     // 6. Chart Logic - Inversion
-// 新增/修改：处理反演界面物质变化时的地区联动
+// 处理物质变化：仅联动更新地区和年份，不画图
 function handleInvSubstanceChange() {
     const subVal = document.getElementById('inv-substance').value;
     const regSel = document.getElementById('inv-country');
     
-    if (!subVal || !inversionData || inversionData.length === 0) return;
+    if (!subVal || !inversionData.length) return;
 
-    // 1. 从数据中提取该物质对应的所有唯一地区 (注意区分大小写)
+    // 1. 动态筛选该物质对应的区域
     const availableRegions = [...new Set(
         inversionData
             .filter(d => (d.substance === subVal || d.Substance === subVal))
             .map(d => d.region || d.Region || d.country)
-    )].filter(r => r).sort(); // 过滤掉空值并排序
+    )].filter(r => r).sort();
 
-    // 2. 更新地区下拉框内容
-    regSel.innerHTML = ''; // 清空旧选项
-    if (availableRegions.length > 0) {
-        availableRegions.forEach(reg => {
-            regSel.add(new Option(reg, reg));
-        });
-        // 默认选中第一个地区
-        regSel.selectedIndex = 0;
-    } else {
-        regSel.add(new Option("-- No Regions Available --", ""));
-    }
+    // 2. 更新地区下拉框
+    regSel.innerHTML = ''; 
+    availableRegions.forEach(reg => {
+        regSel.add(new Option(reg, reg));
+    });
+    regSel.selectedIndex = 0;
 
-    // 3. 联动更新年份范围和图表渲染
+    // 3. 联动更新年份范围（基于新选中的第一个地区）
     handleInvFilterChange();
 }
 
-// 修改：确保年份和图表同步更新
+// 处理地区/其他过滤变化：仅更新年份，不画图
 function handleInvFilterChange() {
     const sub = document.getElementById('inv-substance').value;
     const reg = document.getElementById('inv-country').value;
     
     if (sub && reg) {
-        // 1. 筛选数据以更新年份选择器
         const filtered = inversionData.filter(d => 
             (d.substance === sub || d.Substance === sub) && 
             (d.region === reg || d.Region === reg || d.country === reg)
         );
-        
-        // 2. 自动更新该页面的年份选择器
+        // 自动更新年份选择器，方便用户查看可选范围
         updateYearSelects(filtered, 'inv-start-year', 'inv-end-year');
-
-        // 3. 触发绘图
-        renderInversionChart();
     }
 }
 
