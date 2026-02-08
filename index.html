@@ -579,16 +579,28 @@ if (invSub.options.length > 0) {
     renderInversionChart(); 
 }
 
-        // --- 3. 对比页面 (Comparison) 默认设置 ---
-       const compSub = document.getElementById('comp-substance');
-        if (compSub.options.length > 0) {
-            compSub.selectedIndex = 0;
-            handleCompSubstanceChange(); // 选中物质并填充地区
-            const compReg = document.getElementById('comp-region');
-            if (compReg.options.length > 0) compReg.selectedIndex = 0;
-            updateComparisonYearRange();
-            renderComparisonChart();
-        }
+        // --- 3. 对比页面 (Comparison) 默认初始化设置 ---
+const compSub = document.getElementById('comp-substance');
+const compReg = document.getElementById('comp-region');
+
+if (compSub && compSub.options.length > 0) {
+    // 步骤 1: 选中第一个物质
+    compSub.selectedIndex = 0; 
+    
+    // 步骤 2: 触发物质联动（填充地区列表、选中首个地区、更新年份范围）
+    handleCompSubstanceChange(); 
+
+    // 步骤 3: 确保地区已被填充并选中第一个（在 handleCompSubstanceChange 已处理，这里做双重保险）
+    if (compReg.options.length > 0) {
+        compReg.selectedIndex = 0;
+    }
+
+    // 步骤 4: 再次确认年份范围已更新
+    updateComparisonYearRange();
+
+    // 步骤 5: 初始自动执行画图
+    renderComparisonChart();
+}
     }
     
     // 默认显示首页
