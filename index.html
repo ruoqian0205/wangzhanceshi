@@ -834,6 +834,36 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
     // 6. Chart Logic - Inversion
+// 新增：处理反演界面物质变化时的地区联动
+function handleInvSubstanceChange() {
+    const subVal = document.getElementById('inv-substance').value;
+    const regSel = document.getElementById('inv-country');
+    
+    if (!subVal) return;
+
+    // 1. 从数据中提取该物质对应的所有唯一地区
+    const availableRegions = [...new Set(
+        inversionData
+            .filter(d => d.substance === subVal)
+            .map(d => d.region)
+    )].sort(); // 排序以便于查找
+
+    // 2. 更新地区下拉框内容
+    regSel.innerHTML = ''; // 清空旧选项
+    if (availableRegions.length > 0) {
+        availableRegions.forEach(reg => {
+            regSel.add(new Option(reg, reg));
+        });
+        // 默认选中第一个地区
+        regSel.selectedIndex = 0;
+    } else {
+        regSel.add(new Option("-- No Regions Available --", ""));
+    }
+
+    // 3. 联动更新年份范围和图表渲染
+    handleInvFilterChange();
+}
+
 function handleInvFilterChange() {
     const sub = document.getElementById('inv-substance').value;
     const reg = document.getElementById('inv-country').value;
