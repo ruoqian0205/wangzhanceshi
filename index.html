@@ -802,7 +802,19 @@ function updateInventoryChart(type) {
         },
         // ================================================================
         legend: { bottom: 0, padding: [5, 10] },
-        xAxis: { type: "category", data: yearRange },
+        xAxis: { 
+    type: "category", 
+    data: yearRange,
+    // 1. 让刻度线和标签位于像素中心点（默认是 false，标签在两个刻度中间）
+    boundaryGap: type === "line" ? false : true, 
+    axisTick: {
+        alignWithLabel: true // 2. 确保刻度线与标签对齐
+    },
+    axisLabel: {
+        interval: 'auto', // 自动计算密度，防止重叠
+        hideOverlap: true  // 如果年份太密，自动隐藏重叠的标签
+    }
+},
         yAxis: { type: "value", name: "Gg yr⁻¹" },
         grid: { top: '60px', bottom: '60px', left: '50px', right: '20px', containLabel: true }
     };
