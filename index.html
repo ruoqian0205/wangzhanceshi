@@ -1606,10 +1606,23 @@ chart.setOption({
         }
     },
     xAxis: {
-        type: "category",
-        data: yearRange,
-        axisLabel: { interval: 0, rotate: yearRange.length > 10 ? 45 : 0 }
+    type: "category",
+    data: yearRange,
+    // --- 核心修改：对齐逻辑 ---
+    boundaryGap: false, // 1. 让折线图的点直接落在刻度线上，而不是两个刻度中间
+    axisTick: {
+        alignWithLabel: true // 2. 确保刻度线与文字标签中心对齐
     },
+    axisLabel: {
+        interval: 'auto', // 自动计算密度，防止年份太多挤在一起
+        rotate: yearRange.length > 10 ? 45 : 0, // 年份多时旋转
+        hideOverlap: true, // 自动隐藏重叠的标签
+        margin: 12 // 文字与轴线的间距
+    },
+    axisLine: {
+        onZero: false // 确保轴线在最底部
+    }
+},
     yAxis: {
         type: "value",
         name: "Gg yr⁻¹",
