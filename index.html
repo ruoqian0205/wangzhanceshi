@@ -32,7 +32,7 @@
             </div>
             <div id="user-status">
                 <button onclick="openAuthModal()" class="bg-blue-600 hover:bg-blue-700 px-5 py-2 rounded shadow text-sm font-semibold transition">
-                    Login / Sign up
+                    Login / Register
                 </button>
             </div>
         </div>
@@ -436,7 +436,7 @@
                 <input id="auth-email" class="w-full border p-2 rounded mt-2" placeholder="Email">
                 <div class="flex justify-between mt-4">
                     <button onclick="submitAuth()" class="bg-blue-600 text-white px-4 py-2 rounded">Submit</button>
-                    <button onclick="toggleAuthMode()" class="text-blue-600 text-sm">Switch to Register</button>
+                    <button id="toggle-btn" onclick="toggleAuthMode()" class="text-blue-600 text-sm">Switch to Register</button>
                 </div>
                 <button onclick="closeAuthModal()" class="text-gray-400 text-xs mt-3">Cancel</button>
             </div>
@@ -1724,7 +1724,8 @@ function updateComparisonReferenceTable(data) {
         authMode = authMode === 'login' ? 'register' : 'login';
         document.getElementById('register-fields').classList.toggle('hidden');
         document.getElementById('auth-title').innerText = authMode === 'login' ? 'Login' : 'Register';
-    }
+        document.getElementById('toggle-btn').innerText = authMode === 'login' ? 'Switch to Register' : 'Switch to Login';
+   }
 
     function submitAuth() {
         // GitHub Pages Simulation: Just set true
