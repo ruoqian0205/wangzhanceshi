@@ -1609,7 +1609,7 @@ chart.setOption({
     type: "category",
     data: yearRange,
     // --- 核心修改：对齐逻辑 ---
-    boundaryGap: false, // 1. 让折线图的点直接落在刻度线上，而不是两个刻度中间
+    boundaryGap: true, // 1. 让折线图的点直接落在刻度线上，而不是两个刻度中间
     axisTick: {
         alignWithLabel: true // 2. 确保刻度线与文字标签中心对齐
     },
