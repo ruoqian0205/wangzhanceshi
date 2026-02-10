@@ -1467,28 +1467,41 @@ function renderComparisonChart() {
         }
     });
 
-    // 7. Y轴范围计算
-    //const rawMax = Math.max(...allValuesForScale);
-    //const splitNumber = 5;
-    //let interval = Math.ceil((rawMax || 100) / splitNumber / 5) * 5;
-    //if (interval === 0) interval = 10;
-    //const yMax = interval * splitNumber;
-
+// 7. Y轴范围计算
 const rawMax = Math.max(...allValuesForScale);
-let smartMax, smartInterval;
-if (rawMax <= 0 || !isFinite(rawMax)) {
+const rawMin = Math.min(...allValuesForScale); // 获取包含误差棒底端的绝对最小值
+
+let smartMax, smartMin, smartInterval;
+
+if (!isFinite(rawMax) || allValuesForScale.length <= 1) {
     smartMax = 1;
+    smartMin = 0;
     smartInterval = 0.2;
 } else {
+    // --- 最小值逻辑 ---
+    // 如果最小值小于 0，则设为最小值减去 10% 的余量；否则固定为 0
+    smartMin = rawMin < 0 ? rawMin * 1.1 : 0;
+
+    // --- 最大值逻辑 ---
     // 稍微给 15% 的余量
     const targetMax = rawMax * 1.15;
-    // 根据数量级找到合适的刻度值 (如 0.1, 0.2, 0.5, 1, 2, 5, 10...)
-    const magnitude = Math.pow(10, Math.floor(Math.log10(targetMax)));
-    const candidateSteps = [0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.5, 1.6, 2, 3, 2.5, 5, 10, 150].map(s => s * magnitude / 1);
-    // 找到第一个能覆盖 targetMax / 5 的整齐刻度
-    const idealStep = candidateSteps.find(s => s >= targetMax / 5) || candidateSteps[candidateSteps.length - 1];
-    smartInterval = idealStep;
-    smartMax = idealStep * 5; // 强制 5 等分
+    const range = targetMax - smartMin;
+
+    // 根据数据范围找到合适的刻度步长
+    const magnitude = Math.pow(10, Math.floor(Math.log10(range)));
+    const candidateSteps = [0.1, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.8, 1, 1.2, 1.5, 1.6, 2, 3, 2.5, 5, 10].map(s => s * magnitude);
+    
+    // 找到能将范围大致分为 5 段的整齐刻度
+    smartInterval = candidateSteps.find(s => s >= range / 5) || candidateSteps[candidateSteps.length - 1];
+    
+    // 重新对齐 smartMin 和 smartMax 到刻度上
+    smartMin = Math.floor(smartMin / smartInterval) * smartInterval;
+    smartMax = smartMin + smartInterval * 6; // 确保包含 targetMax
+    
+    // 再次检查：如果原本数据都大于0，且对齐后 smartMin 变成了负数（比如-0.1），强制回 0
+    if (rawMin >= 0 && smartMin < 0) {
+        smartMin = 0;
+    }
 }
 
     // 8. 设置图表配置
